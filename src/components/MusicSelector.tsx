@@ -132,6 +132,7 @@ export function MusicSelector({
   const mappedCategory = suggestedCategory ? (CATEGORY_MUSIC_MAP[suggestedCategory] || 'all') : 'all';
   const [filter, setFilter] = useState<string>(mappedCategory);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const musicInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // initialize audio on mount
@@ -251,54 +252,58 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-start">
-          <label className="cursor-pointer">
-            <input
-              type="file"
-              accept=".mp3,audio/mp3,audio/mpeg"
-              className="hidden"
-              id="music-upload-v13"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const isAudio = file.type.startsWith('audio/') || 
-                                  file.name.toLowerCase().endsWith('.mp3') || 
-                                  file.name.toLowerCase().endsWith('.wav') || 
-                                  file.name.toLowerCase().endsWith('.m4a');
-                  
-                  if (!isAudio) {
-                    toast.error('Por favor, selecciona un archivo de audio (MP3, WAV o M4A)');
-                    return;
-                  }
-                  
-                  if (file.size > 5 * 1024 * 1024) {
-                    toast.error('El archivo es muy pesado (Máx 5MB)');
-                    return;
-                  }
-
-                  const reader = new FileReader();
-                  reader.onload = (event) => {
-                    const dataUrl = event.target?.result as string;
-                    const newTrack: MusicTrack = {
-                      id: 'custom-' + Date.now(),
-                      name: file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name,
-                      category: 'Mi Música',
-                      duration: 'Personal',
-                      emoji: '🎶',
-                      url: dataUrl
-                    };
-                    onTrackSelect(newTrack);
-                    toast.success('¡Canción cargada con éxito!');
-                  };
-                  reader.readAsDataURL(file);
+        <div className="flex flex-col gap-2 items-start w-fit">
+          <input
+            type="file"
+            ref={musicInputRef}
+            accept="audio/*"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const isAudio = file.type.startsWith('audio/') || 
+                                file.name.toLowerCase().endsWith('.mp3') || 
+                                file.name.toLowerCase().endsWith('.wav') || 
+                                file.name.toLowerCase().endsWith('.m4a');
+                
+                if (!isAudio) {
+                  toast.error('Por favor, selecciona un archivo de audio (MP3, WAV o M4A)');
+                  return;
                 }
-              }}
-            />
-            <div className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center transition-all active:scale-95">
-              <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-              <span className="font-bold uppercase tracking-tight">📂 SUBIR MP3</span>
-            </div>
-          </label>
+                
+                if (file.size > 5 * 1024 * 1024) {
+                  toast.error('El archivo es muy pesado (Máx 5MB)');
+                  return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  const dataUrl = event.target?.result as string;
+                  const newTrack: MusicTrack = {
+                    id: 'custom-' + Date.now(),
+                    name: file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name,
+                    category: 'Mi Música',
+                    duration: 'Personal',
+                    emoji: '🎶',
+                    url: dataUrl
+                  };
+                  onTrackSelect(newTrack);
+                  toast.success('¡Canción cargada con éxito!');
+                };
+                reader.readAsDataURL(file);
+
+                // Reset para permitir subir el mismo archivo
+                if (musicInputRef.current) musicInputRef.current.value = '';
+              }
+            }}
+          />
+          <div 
+            onClick={() => musicInputRef.current?.click()}
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center cursor-pointer transition-all active:scale-95"
+          >
+            <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
+            <span className="font-bold uppercase tracking-tight">📂 SUBIR MP3</span>
+          </div>
         </div>
       </div>
 
