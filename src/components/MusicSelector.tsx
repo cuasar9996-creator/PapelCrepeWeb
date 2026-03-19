@@ -251,10 +251,10 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 items-center">
           <input
             type="file"
-            accept="audio/*"
+            accept=".mp3, .wav, .m4a, audio/mpeg, audio/wav, audio/x-m4a"
             className="hidden"
             id="music-upload-top"
             onChange={(e) => {
@@ -285,10 +285,10 @@ export function MusicSelector({
           <Button
             variant="default"
             size="sm"
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-11 px-4 text-xs w-full shadow-lg shadow-purple-200 transition-all active:scale-95"
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[11px] w-full max-w-[220px] shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => document.getElementById('music-upload-top')?.click()}
           >
-            <Upload className="w-4 h-4 mr-2 shrink-0" />
+            <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
             <span className="font-bold">SUBIR MI PROPIA MÚSICA</span>
           </Button>
         </div>
