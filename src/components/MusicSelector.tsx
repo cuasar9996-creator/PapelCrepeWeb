@@ -256,18 +256,17 @@ export function MusicSelector({
             type="file"
             accept="audio/mpeg, audio/mp3, audio/wav, .mp3"
             className="hidden"
-            id="music-upload-v4"
+            id="music-upload-v5"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
                 const isAudio = file.type.startsWith('audio/') || 
                                 file.name.endsWith('.mp3') || 
                                 file.name.endsWith('.wav') || 
-                                file.name.endsWith('.m4a') ||
-                                file.name.endsWith('.ogg');
+                                file.name.endsWith('.m4a');
                 
                 if (!isAudio) {
-                  toast.error('Por favor, selecciona un archivo de música (MP3, WAV, M4A u OGG)');
+                  toast.error('Por favor, selecciona un archivo de música (MP3 o WAV)');
                   return;
                 }
                 
@@ -297,15 +296,15 @@ export function MusicSelector({
           <Button
             variant="default"
             size="sm"
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-6 text-[11px] w-fit shadow-md shadow-purple-200 transition-all active:scale-95"
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
-              const input = document.getElementById('music-upload-v4');
+              const input = document.getElementById('music-upload-v5');
               if (input) (input as any).value = null;
               input?.click();
             }}
           >
-            <Upload className="w-4 h-4 mr-2 shrink-0" />
-            <span className="font-bold">SELECCIONAR MP3</span>
+            <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
+            <span className="font-bold">📂 CARGAR MP3</span>
           </Button>
         </div>
       </div>
