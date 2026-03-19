@@ -251,27 +251,27 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-start">
+        <div className="flex flex-col gap-2 items-start w-fit">
           <input
             type="file"
-            accept="audio/mpeg, audio/mp3, audio/wav, .mp3"
             className="hidden"
-            id="music-upload-v5"
+            id="music-upload-v6"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
+                // Validación estricta por extensión y tipo
                 const isAudio = file.type.startsWith('audio/') || 
-                                file.name.endsWith('.mp3') || 
-                                file.name.endsWith('.wav') || 
-                                file.name.endsWith('.m4a');
+                                file.name.toLowerCase().endsWith('.mp3') || 
+                                file.name.toLowerCase().endsWith('.wav') || 
+                                file.name.toLowerCase().endsWith('.m4a');
                 
                 if (!isAudio) {
-                  toast.error('Por favor, selecciona un archivo de música (MP3 o WAV)');
+                  toast.error('Por favor, selecciona un archivo de audio (MP3, WAV o M4A)');
                   return;
                 }
                 
                 if (file.size > 10 * 1024 * 1024) {
-                  toast.error('El archivo debe ser menor a 10MB');
+                  toast.error('El archivo debe ser demasiado grande (Máx 10MB)');
                   return;
                 }
 
@@ -287,7 +287,7 @@ export function MusicSelector({
                     url: dataUrl
                   };
                   onTrackSelect(newTrack);
-                  toast.success('¡Canción cargada con éxito!');
+                  toast.success('¡Canción cargada!');
                 };
                 reader.readAsDataURL(file);
               }
@@ -298,13 +298,13 @@ export function MusicSelector({
             size="sm"
             className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
-              const input = document.getElementById('music-upload-v5');
+              const input = document.getElementById('music-upload-v6');
               if (input) (input as any).value = null;
               input?.click();
             }}
           >
             <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold">📂 CARGAR MP3</span>
+            <span className="font-bold uppercase">📂 Subir MP3 (Archivos)</span>
           </Button>
         </div>
       </div>
