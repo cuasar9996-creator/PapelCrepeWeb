@@ -256,7 +256,7 @@ export function MusicSelector({
           <input
             type="file"
             ref={musicInputRef}
-            accept="audio/*"
+            accept=".mp3,audio/mpeg,application/octet-stream"
             className="hidden"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -302,7 +302,7 @@ export function MusicSelector({
             className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center cursor-pointer transition-all active:scale-95"
           >
             <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold uppercase tracking-tight">📂 SUBIR MP3</span>
+            <span className="font-bold uppercase tracking-tight">📂 BUSCAR ARCHIVO</span>
           </div>
         </div>
       </div>
