@@ -251,10 +251,10 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-center w-full">
+        <div className="flex flex-col gap-2 items-start w-full">
           <input
             type="file"
-            accept=".mp3,audio/mpeg"
+            accept="audio/mpeg,.mp3"
             className="hidden"
             id="music-upload-top"
             onChange={(e) => {
@@ -285,7 +285,7 @@ export function MusicSelector({
           <Button
             variant="default"
             size="sm"
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-1/2 shadow-md shadow-purple-200 transition-all active:scale-95"
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[180px] shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
               const input = document.getElementById('music-upload-top');
               if (input) (input as any).value = null; // Reset value so same file can be re-selected
