@@ -251,12 +251,12 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-start w-full">
+        <div className="flex flex-col gap-2 items-start">
           <input
             type="file"
-            accept="audio/mpeg,.mp3"
+            accept=".mp3"
             className="hidden"
-            id="music-upload-top"
+            id="music-upload-v3"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
@@ -276,7 +276,7 @@ export function MusicSelector({
                     url: dataUrl
                   };
                   onTrackSelect(newTrack);
-                  toast.success('¡Tu canción ha sido cargada!');
+                  toast.success('¡Canción cargada con éxito!');
                 };
                 reader.readAsDataURL(file);
               }
@@ -285,15 +285,15 @@ export function MusicSelector({
           <Button
             variant="default"
             size="sm"
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[180px] shadow-md shadow-purple-200 transition-all active:scale-95"
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-6 text-[11px] w-fit shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
-              const input = document.getElementById('music-upload-top');
-              if (input) (input as any).value = null; // Reset value so same file can be re-selected
+              const input = document.getElementById('music-upload-v3');
+              if (input) (input as any).value = null;
               input?.click();
             }}
           >
-            <Upload className="w-3 h-3 mr-2 shrink-0" />
-            <span className="font-bold">SUBIR MI MÚSICA</span>
+            <Upload className="w-4 h-4 mr-2 shrink-0" />
+            <span className="font-bold">BUSCAR ARCHIVO MP3</span>
           </Button>
         </div>
       </div>
