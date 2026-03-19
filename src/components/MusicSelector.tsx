@@ -255,9 +255,9 @@ export function MusicSelector({
           <label className="cursor-pointer">
             <input
               type="file"
-              accept="audio/mpeg, .mp3"
+              accept="audio/*, .mp3, .wav, .m4a"
               className="hidden"
-              id="music-upload-v11"
+              id="music-upload-v12"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -294,9 +294,9 @@ export function MusicSelector({
                 }
               }}
             />
-            <div className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center transition-all active:scale-95">
+            <div className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[200px] shadow-md shadow-purple-200 flex items-center justify-center transition-all active:scale-95">
               <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-              <span className="font-bold uppercase tracking-tight">📂 CARGAR MÚSICA</span>
+              <span className="font-bold uppercase tracking-tight">📂 ELEGIR ARCHIVO DE AUDIO</span>
             </div>
           </label>
         </div>
