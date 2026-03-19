@@ -255,15 +255,12 @@ export function MusicSelector({
           <label className="cursor-pointer">
             <input
               type="file"
-              accept="audio/*, .mp3, .wav, .m4a"
-              multiple
+              accept=".mp3,audio/mp3,audio/mpeg"
               className="hidden"
-              id="music-upload-final"
+              id="music-upload-v13"
               onChange={(e) => {
-                const files = e.target.files;
-                if (files && files.length > 0) {
-                  const file = files[0];
-                  // El mismo proceso de antes...
+                const file = e.target.files?.[0];
+                if (file) {
                   const isAudio = file.type.startsWith('audio/') || 
                                   file.name.toLowerCase().endsWith('.mp3') || 
                                   file.name.toLowerCase().endsWith('.wav') || 
@@ -297,14 +294,11 @@ export function MusicSelector({
                 }
               }}
             />
-            <div className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[200px] shadow-md shadow-purple-200 flex items-center justify-center transition-all active:scale-95">
+            <div className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center transition-all active:scale-95">
               <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-              <span className="font-bold uppercase tracking-tight text-center">📂 Seleccionar Audio</span>
+              <span className="font-bold uppercase tracking-tight">📂 SUBIR MP3</span>
             </div>
           </label>
-          <p className="text-[9px] text-gray-500 italic mt-1 leading-tight">
-            * Si no ves "Archivos", desliza el menú hacia los lados.
-          </p>
         </div>
       </div>
 
