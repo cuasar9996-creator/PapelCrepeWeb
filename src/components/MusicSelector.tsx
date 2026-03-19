@@ -254,7 +254,7 @@ export function MusicSelector({
         <div className="flex flex-col gap-2 items-start">
           <input
             type="file"
-            accept=".mp3"
+            accept="audio/mp3,audio/mpeg,audio/wav,audio/x-m4a,audio/m4a,audio/mp4,audio/ogg,.mp3,.wav,.m4a,.ogg"
             className="hidden"
             id="music-upload-v3"
             onChange={(e) => {
