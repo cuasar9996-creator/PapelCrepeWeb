@@ -254,9 +254,9 @@ export function MusicSelector({
         <div className="flex flex-col gap-2 items-start w-fit">
           <input
             type="file"
-            accept="audio/mpeg,audio/mp3,audio/wav,audio/x-m4a,audio/m4a,audio/mp4,audio/ogg"
+            accept="audio/mpeg, audio/mp3, audio/wav, .mp3, .wav"
             className="hidden"
-            id="music-upload-v7"
+            id="music-upload-v8"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
@@ -300,13 +300,13 @@ export function MusicSelector({
             size="sm"
             className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
-              const input = document.getElementById('music-upload-v7');
+              const input = document.getElementById('music-upload-v8');
               if (input) (input as any).value = null;
               input?.click();
             }}
           >
             <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold uppercase tracking-tight">📂 Subir mi Música</span>
+            <span className="font-bold uppercase tracking-tight">📂 Subir Música (MP3)</span>
           </Button>
         </div>
       </div>
