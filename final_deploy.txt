@@ -1,0 +1,99 @@
+﻿ ┬╗   Warning: --build is now the default and can safely be omitted.
+[96m[1mÔÇï[22m[39m
+[96m[1mNetlify Build                                                 [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Version[22m[39m
+  @netlify/build 35.8.3
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Flags[22m[39m
+  accountId: 68ff8131396c1c3ef93aba88
+  deployId: 69b073204264fe3700476166
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Current directory[22m[39m
+  C:\Users\Gustavo\Desktop\Invitaciones 2026 2
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Config file[22m[39m
+  No config file was defined: using default values.
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Context[22m[39m
+  production
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Using Next.js Runtime - v5.15.9[22m[39m
+[96m[1mÔÇï[22m[39m
+[96m[1mBuild command from Netlify app                                [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+ÔÇï
+[36m$ npm run build[39m
+
+> nextjs_tailwind_shadcn_ts@0.2.0 build
+> next build
+
+Ôû▓ Next.js 16.1.3 (Turbopack)
+- Environments: .env.local, .env
+
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 6.9s
+  Skipping validation of types
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/6) ...
+  Generating static pages using 15 workers (1/6) 
+  Generating static pages using 15 workers (2/6) 
+  Generating static pages using 15 workers (4/6) 
+Ô£ô Generating static pages using 15 workers (6/6) in 699.0ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ Ôùï /admin
+Ôö£ ãÆ /api
+Ôöö Ôùï /icon.png
+
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+
+ÔÇï
+[90m(build.command completed in 14s)[39m
+[96m[1mÔÇï[22m[39m
+[96m[1mFunctions bundling                                            [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+ÔÇï
+Packaging Functions from [36m.netlify\functions-internal[39m directory:
+ - ___netlify-server-handler\___netlify-server-handler.mjs
+ÔÇï
+ÔÇï
+[90m(Functions bundling completed in 3.2s)[39m
+
+Deploying to Netlify
+ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+[32mDeploy path: [39mC:\Users\Gustavo\Desktop\Invitaciones 2026 2\.next
+
+[96m[1mÔÇï[22m[39m
+[96m[1mNetlify Build Complete                                        [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+ÔÇï
+[90m(Netlify Build completed in 2m 45s)[39m
+
+­ƒÜÇ Deploy complete
+ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+Ôò¡ÔöÇÔöÇÔöÇ Ô¼Ñ  Draft deploy is li ÔöÇÔöÇÔöÇÔò«
+Ôöé                             Ôöé
+Ôöé      Deployed draft to      Ôöé
+Ôöé   https://69b073204264fe3   Ôöé
+Ôöé   700476166--preeminent-m   Ôöé
+Ôöé   elomakarona-21dd22.netl   Ôöé
+Ôöé           ify.app           Ôöé
+Ôöé                             Ôöé
+Ôò░ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔò»
+
+[32mBuild logs: [39m        https://app.netlify.com/projects/preeminent-melomakarona-21dd22/deploys/69b073204264fe3700476166
+[32mFunction logs: [39m     https://app.netlify.com/projects/preeminent-melomakarona-21dd22/logs/functions?scope=deploy:69b073204264fe3700476166
+[32mEdge function Logs: [39mhttps://app.netlify.com/projects/preeminent-melomakarona-21dd22/logs/edge-functions?scope=deployid:69b073204264fe3700476166
+
+If everything looks good on your draft URL, deploy it to your main project URL with the --prod flag:
+netlify deploy --prod
+

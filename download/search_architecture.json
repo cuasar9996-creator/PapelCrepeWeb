@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://medium.com/@faikirkham/clean-architecture-in-flutter-2024-building-scalable-and-maintainable-applications-7f84fe4f3cd1",
+    "name": "Clean Architecture in Flutter 2024: Building Scalable and Maintainable Applications | by faik irkham | Medium",
+    "snippet": "This article provides a comprehensive guide to implementing clean architecture in Flutter in 2024, incorporating best practices and modern tools.\nIn the context of Flutter, clean architecture provides a solid foundation for building complex applications by structuring the code into distinct layers. This article provides a comprehensive...",
+    "host_name": "medium.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://dev.to/princetomarappdev/clean-code-architecture-and-bloc-in-flutter-a-comprehensive-guide-for-beginners-and-experts-33k8",
+    "name": "Clean Code Architecture and BLoC in Flutter: A Comprehensive Guide for Beginners and Experts - DEV Community",
+    "snippet": "Separation of Layers: Ensure that UI, business logic, and data are kept in separate layers to maintain a clean architecture.\nWhether you're building a small app or a large enterprise-level application, adopting Clean Architecture and BLoC will set you on the path to writing maintainable and scalable code.",
+    "host_name": "dev.to",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.linkedin.com/pulse/unrevealed-truths-you-should-know-clean-architecture-flutter-parvin-mxj9c",
+    "name": "Unrevealed Truths You Should Know About Clean Architecture in Flutter - LinkedIn",
+    "snippet": "Summary · Don't over-engineer simple apps with unnecessary layers. · Keep your models clearly separated for API, domain, and UI where possible.",
+    "host_name": "www.linkedin.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://docs.flutter.dev/app-architecture/guide",
+    "name": "Guide to app architecture - Flutter documentation",
+    "snippet": "The following pages demonstrate how to build an app using best practices. The recommendations in this guide can be applied to most apps, ... Missing: 2024 | Show results with: 2024\nThe following pages demonstrate how to build an app using best practices. The recommendations in this guide can be applied to most apps, making them easier to scale, test, and maintain.",
+    "host_name": "docs.flutter.dev",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://proandroiddev.com/flutter-clean-code-and-best-practices-3d18b0e04ad5",
+    "name": "Flutter clean code and best practices | by Radheshyam Singh - ProAndroidDev",
+    "snippet": "Best Practices in Flutter · Why: Proper state management ensures that your app remains responsive and maintains a clear separation of concerns.",
+    "host_name": "proandroiddev.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=ELFORM9fmss",
+    "name": "Flutter Clean Architecture Full Course For Beginners - Bloc, Supabase, Hive, GetIt",
+    "snippet": "In this 7 hour tutorial, we will learn about Clean Architecture in Flutter by building a full stack application. We will learn about SOLID ...",
+    "host_name": "www.youtube.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/FlutterDev/comments/192h8l0/how_do_you_architect_your_flutter_apps_research",
+    "name": "How do you architect your Flutter apps? Research for flutter.dev docs - Reddit",
+    "snippet": "Clean Architecture, avoid BLOC or anything related to it. Build interfaces and abstract classes. Solid design of the data models, thinking in ... Best way to architect a new Flutter project from scratch? : r/FlutterDev Feedback Needed: Blog App with Clean Architecture Implementation : r/FlutterDev More results from www.reddit.com",
+    "host_name": "www.reddit.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://foresightmobile.com/blog/whats-new-in-flutter-mobile-development",
+    "name": "Your Questions Answered: What's New in Flutter Mobile Development in 2025?",
+    "snippet": "This guide will equip you with the knowledge to choose the right tools and architecture for building scalable, maintainable, and high-performing apps.",
+    "host_name": "foresightmobile.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

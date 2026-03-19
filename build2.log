@@ -1,0 +1,134 @@
+﻿ ┬╗   Warning: --build is now the default and can safely be omitted.
+[96m[1mÔÇï[22m[39m
+[96m[1mNetlify Build                                                 [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Version[22m[39m
+  @netlify/build 35.8.3
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Flags[22m[39m
+  accountId: 68ff8131396c1c3ef93aba88
+  deployId: 69b06f56d8c068274849904f
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Current directory[22m[39m
+  C:\Users\Gustavo\Desktop\Invitaciones 2026 2
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Config file[22m[39m
+  No config file was defined: using default values.
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Context[22m[39m
+  production
+[36m[1mÔÇï[22m[39m
+[36m[1mÔØ» Using Next.js Runtime - v5.15.9[22m[39m
+[96m[1mÔÇï[22m[39m
+[96m[1mBuild command from Netlify app                                [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+ÔÇï
+[36m$ npm run build[39m
+
+> nextjs_tailwind_shadcn_ts@0.2.0 build
+> next build
+
+Ôû▓ Next.js 16.1.3 (Turbopack)
+- Environments: .env.local, .env
+
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 5.2s
+  Skipping validation of types
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/6) ...
+  Generating static pages using 15 workers (1/6) 
+  Generating static pages using 15 workers (2/6) 
+  Generating static pages using 15 workers (4/6) 
+Ô£ô Generating static pages using 15 workers (6/6) in 768.6ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ Ôùï /admin
+Ôö£ ãÆ /api
+Ôöö Ôùï /icon.png
+
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+
+ÔÇï
+[90m(build.command completed in 10.7s)[39m
+[96m[1mÔÇï[22m[39m
+[96m[1mFunctions bundling                                            [22m[39m
+[96m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+ÔÇï
+Packaging Functions from [36m.netlify\functions-internal[39m directory:
+ - ___netlify-server-handler\___netlify-server-handler.mjs
+ÔÇï
+ÔÇï
+[90m(Functions bundling completed in 1.1s)[39m
+[91m[1mÔÇï[22m[39m
+[91m[1mPlugin "@netlify/plugin-nextjs" failed                        [22m[39m
+[91m[1mÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ[22m[39m
+ÔÇï
+  [31m[1mError message[22m[39m
+  Error: Failed publishing static content
+ÔÇï
+  [31m[1mPlugin details[22m[39m
+  Package:        @netlify/plugin-nextjs
+  Version:        5.15.9
+  Repository:     git+https://github.com/opennextjs/opennextjs-netlify.git
+  npm link:       https://www.npmjs.com/package/@netlify/plugin-nextjs
+  Report issues:  https://github.com/opennextjs/opennextjs-netlify/issues
+ÔÇï
+  [31m[1mError location[22m[39m
+  In "onPostBuild" event in "@netlify/plugin-nextjs" from undefined
+ÔÇï
+  [31m[1mResolved config[22m[39m
+  build:
+    command: npm run build
+    commandOrigin: ui
+    publish: C:\Users\Gustavo\Desktop\Invitaciones 2026 2\.next
+    publishOrigin: ui
+  headers:
+    - for: /_next/static/*
+      values:
+        Cache-Control: public, max-age=31536000, immutable
+  headersOrigin: inline
+  plugins:
+    - inputs: {}
+      origin: default
+      package: "@netlify/plugin-nextjs"
+  redirects:
+    - from: /_next/image
+      query:
+        q: :quality
+        url: :url
+        w: :width
+      status: 200
+      to: /.netlify/images?url=:url&w=:width&q=:quality
+    - from: /_ipx/*
+      query:
+        q: :quality
+        url: :url
+        w: :width
+      status: 200
+      to: /.netlify/images?url=:url&w=:width&q=:quality
+  redirectsOrigin: inline
+node.exe :  ┬╗   Error: Error 
+while running build
+En C:\Users\Gustavo\AppData\Ro
+aming\npm\netlify.ps1: 24 
+Carácter: 5
++     & "node$exe"  "$basedir/
+node_modules/netlify-cli/bin/r
+un.js" $arg ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: ( ┬╗   Err  
+  or: Error while running b   
+ uild:String) [], RemoteEx    
+ception
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
