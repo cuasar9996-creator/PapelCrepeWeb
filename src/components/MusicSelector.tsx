@@ -251,16 +251,14 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-start w-fit">
+        <div className="flex flex-col gap-2 items-start relative overflow-hidden">
           <input
             type="file"
-            accept=".mp3,.wav,.m4a"
-            className="hidden"
-            id="music-upload-v9"
+            className="absolute inset-0 opacity-0 pointer-events-none cursor-pointer"
+            id="music-upload-v10"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
-                // Validación estricta por extensión y tipo
                 const isAudio = file.type.startsWith('audio/') || 
                                 file.name.toLowerCase().endsWith('.mp3') || 
                                 file.name.toLowerCase().endsWith('.wav') || 
@@ -271,7 +269,6 @@ export function MusicSelector({
                   return;
                 }
                 
-                // Límite de 5MB sugerido por el usuario
                 if (file.size > 5 * 1024 * 1024) {
                   toast.error('El archivo es muy pesado (Máx 5MB)');
                   return;
@@ -300,13 +297,13 @@ export function MusicSelector({
             size="sm"
             className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
-              const input = document.getElementById('music-upload-v9');
+              const input = document.getElementById('music-upload-v10');
               if (input) (input as any).value = null;
               input?.click();
             }}
           >
             <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold uppercase tracking-tight">📂 Subir Música</span>
+            <span className="font-bold uppercase tracking-tight text-[9px]">📂 Buscar mi Música</span>
           </Button>
         </div>
       </div>
