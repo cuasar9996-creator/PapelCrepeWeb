@@ -145,8 +145,12 @@ export default function Home() {
         const userIsAdmin = currentUser?.email === 'cuasar9996@gmail.com';
         setIsAdmin(userIsAdmin);
 
-        // Desactivamos el modo mantenimiento para el lanzamiento oficial
-        setIsMaintenance(false);
+        // Si el sitio está en mantenimiento Y el usuario NO es admin, mostrar pantalla de mantenimiento
+        if (maintenanceActive && !userIsAdmin) {
+          setIsMaintenance(true);
+        } else {
+          setIsMaintenance(false);
+        }
       } catch (e) {
         console.error("Error checking maintenance:", e);
       }
