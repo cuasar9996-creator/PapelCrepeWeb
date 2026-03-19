@@ -488,7 +488,7 @@ export function InvitationEditor({
                               Personalización Avanzada
                             </h4>
                             <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
-                              Usa las pestañas <b className="text-indigo-600 uppercase tracking-tighter">FOTOS</b> y <b className="text-indigo-600 uppercase tracking-tighter">MÚSICA</b> para subir tu contenido. Podrás activar el <b className="text-rose-600 uppercase tracking-tighter">MURO DE MENSAJES</b> en la pestaña <b className="text-indigo-600 uppercase tracking-tighter">PLUS!</b> una vez que hayas completado los datos.
+                              Usa la pestaña <b className="text-indigo-600 uppercase tracking-tighter">MÚSICA</b> para subir tu propia canción favorita. Podrás activar el <b className="text-rose-600 uppercase tracking-tighter">MURO DE MENSAJES</b> en la pestaña <b className="text-indigo-600 uppercase tracking-tighter">PLUS!</b> para que tus invitados dejen saludos.
                             </p>
                           </div>
                         </div>

@@ -245,15 +245,16 @@ export function MusicSelector({
             )}
           </motion.div>
         ) : (
-          <div className="text-center py-1">
-            <p className="text-[10px] text-gray-400">Ninguna música seleccionada</p>
+          <div className="text-center py-2 bg-purple-50/50 rounded-lg border border-purple-100/50">
+            <p className="text-[10px] text-purple-600 font-bold uppercase tracking-tight">Carga tu propia banda sonora:</p>
+            <p className="text-[9px] text-gray-400 mt-0.5">MP3, WAV o M4A son compatibles</p>
           </div>
         )}
 
-        <div className="flex justify-center">
+        <div className="flex flex-col gap-2">
           <input
             type="file"
-            accept="audio/mp3,audio/wav,audio/mpeg"
+            accept="audio/*"
             className="hidden"
             id="music-upload-top"
             onChange={(e) => {
@@ -282,13 +283,13 @@ export function MusicSelector({
             }}
           />
           <Button
-            variant="outline"
+            variant="default"
             size="sm"
-            className="border-purple-200 text-purple-600 hover:bg-purple-50 rounded-lg h-8 px-4 text-[10px] w-full"
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-11 px-4 text-xs w-full shadow-lg shadow-purple-200 transition-all active:scale-95"
             onClick={() => document.getElementById('music-upload-top')?.click()}
           >
-            <Upload className="w-3 h-3 mr-2 shrink-0" />
-            <span className="truncate">Subir mi propia música</span>
+            <Upload className="w-4 h-4 mr-2 shrink-0" />
+            <span className="font-bold">SUBIR MI PROPIA MÚSICA</span>
           </Button>
         </div>
       </div>
