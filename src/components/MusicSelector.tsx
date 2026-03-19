@@ -252,11 +252,11 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-start w-fit">
+        <div className="flex flex-col gap-2 items-start w-fit text-left">
           <input
             type="file"
             ref={musicInputRef}
-            accept=".mp3,audio/mpeg,application/octet-stream"
+            accept=".mp3,.wav,.m4a"
             className="hidden"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -299,10 +299,10 @@ export function MusicSelector({
           />
           <div 
             onClick={() => musicInputRef.current?.click()}
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center cursor-pointer transition-all active:scale-95"
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[200px] shadow-md shadow-purple-200 flex items-center justify-center cursor-pointer transition-all active:scale-95"
           >
             <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold uppercase tracking-tight">📂 BUSCAR ARCHIVO</span>
+            <span className="font-bold uppercase tracking-tight">📂 ELEGIR CANCIÓN (MP3)</span>
           </div>
         </div>
       </div>
