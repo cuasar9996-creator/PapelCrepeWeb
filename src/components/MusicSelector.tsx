@@ -254,16 +254,28 @@ export function MusicSelector({
         <div className="flex flex-col gap-2 items-start">
           <input
             type="file"
-            accept="audio/mp3,audio/mpeg,audio/wav,audio/x-m4a,audio/m4a,audio/mp4,audio/ogg,.mp3,.wav,.m4a,.ogg"
+            accept="*"
             className="hidden"
-            id="music-upload-v3"
+            id="music-upload-v4"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
+                const isAudio = file.type.startsWith('audio/') || 
+                                file.name.endsWith('.mp3') || 
+                                file.name.endsWith('.wav') || 
+                                file.name.endsWith('.m4a') ||
+                                file.name.endsWith('.ogg');
+                
+                if (!isAudio) {
+                  toast.error('Por favor, selecciona un archivo de música (MP3, WAV, M4A u OGG)');
+                  return;
+                }
+                
                 if (file.size > 10 * 1024 * 1024) {
                   toast.error('El archivo debe ser menor a 10MB');
                   return;
                 }
+
                 const reader = new FileReader();
                 reader.onload = (event) => {
                   const dataUrl = event.target?.result as string;
@@ -287,13 +299,13 @@ export function MusicSelector({
             size="sm"
             className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-6 text-[11px] w-fit shadow-md shadow-purple-200 transition-all active:scale-95"
             onClick={() => {
-              const input = document.getElementById('music-upload-v3');
+              const input = document.getElementById('music-upload-v4');
               if (input) (input as any).value = null;
               input?.click();
             }}
           >
             <Upload className="w-4 h-4 mr-2 shrink-0" />
-            <span className="font-bold">BUSCAR ARCHIVO MP3</span>
+            <span className="font-bold">SELECCIONAR MP3</span>
           </Button>
         </div>
       </div>
