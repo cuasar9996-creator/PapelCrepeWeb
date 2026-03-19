@@ -251,10 +251,10 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-center">
+        <div className="flex flex-col gap-2 items-center w-full">
           <input
             type="file"
-            accept=".mp3, .wav, .m4a, audio/mpeg, audio/wav, audio/x-m4a"
+            accept=".mp3,audio/mpeg"
             className="hidden"
             id="music-upload-top"
             onChange={(e) => {
@@ -272,11 +272,11 @@ export function MusicSelector({
                     name: file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name,
                     category: 'Mi Música',
                     duration: 'Personal',
-                    emoji: '🎵',
+                    emoji: '🎶',
                     url: dataUrl
                   };
                   onTrackSelect(newTrack);
-                  toast.success('¡Tu música ha sido cargada!');
+                  toast.success('¡Tu canción ha sido cargada!');
                 };
                 reader.readAsDataURL(file);
               }
@@ -285,11 +285,15 @@ export function MusicSelector({
           <Button
             variant="default"
             size="sm"
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[11px] w-full max-w-[220px] shadow-md shadow-purple-200 transition-all active:scale-95"
-            onClick={() => document.getElementById('music-upload-top')?.click()}
+            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-1/2 shadow-md shadow-purple-200 transition-all active:scale-95"
+            onClick={() => {
+              const input = document.getElementById('music-upload-top');
+              if (input) (input as any).value = null; // Reset value so same file can be re-selected
+              input?.click();
+            }}
           >
-            <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold">SUBIR MI PROPIA MÚSICA</span>
+            <Upload className="w-3 h-3 mr-2 shrink-0" />
+            <span className="font-bold">SUBIR MI MÚSICA</span>
           </Button>
         </div>
       </div>
