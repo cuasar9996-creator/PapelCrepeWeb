@@ -251,60 +251,54 @@ export function MusicSelector({
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-start relative overflow-hidden">
-          <input
-            type="file"
-            className="absolute inset-0 opacity-0 pointer-events-none cursor-pointer"
-            id="music-upload-v10"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                const isAudio = file.type.startsWith('audio/') || 
-                                file.name.toLowerCase().endsWith('.mp3') || 
-                                file.name.toLowerCase().endsWith('.wav') || 
-                                file.name.toLowerCase().endsWith('.m4a');
-                
-                if (!isAudio) {
-                  toast.error('Por favor, selecciona un archivo de audio (MP3, WAV o M4A)');
-                  return;
-                }
-                
-                if (file.size > 5 * 1024 * 1024) {
-                  toast.error('El archivo es muy pesado (Máx 5MB)');
-                  return;
-                }
+        <div className="flex flex-col gap-2 items-start">
+          <label className="cursor-pointer">
+            <input
+              type="file"
+              accept="audio/mpeg, .mp3"
+              className="hidden"
+              id="music-upload-v11"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const isAudio = file.type.startsWith('audio/') || 
+                                  file.name.toLowerCase().endsWith('.mp3') || 
+                                  file.name.toLowerCase().endsWith('.wav') || 
+                                  file.name.toLowerCase().endsWith('.m4a');
+                  
+                  if (!isAudio) {
+                    toast.error('Por favor, selecciona un archivo de audio (MP3, WAV o M4A)');
+                    return;
+                  }
+                  
+                  if (file.size > 5 * 1024 * 1024) {
+                    toast.error('El archivo es muy pesado (Máx 5MB)');
+                    return;
+                  }
 
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                  const dataUrl = event.target?.result as string;
-                  const newTrack: MusicTrack = {
-                    id: 'custom-' + Date.now(),
-                    name: file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name,
-                    category: 'Mi Música',
-                    duration: 'Personal',
-                    emoji: '🎶',
-                    url: dataUrl
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    const dataUrl = event.target?.result as string;
+                    const newTrack: MusicTrack = {
+                      id: 'custom-' + Date.now(),
+                      name: file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name,
+                      category: 'Mi Música',
+                      duration: 'Personal',
+                      emoji: '🎶',
+                      url: dataUrl
+                    };
+                    onTrackSelect(newTrack);
+                    toast.success('¡Canción cargada con éxito!');
                   };
-                  onTrackSelect(newTrack);
-                  toast.success('¡Canción cargada con éxito!');
-                };
-                reader.readAsDataURL(file);
-              }
-            }}
-          />
-          <Button
-            variant="default"
-            size="sm"
-            className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 transition-all active:scale-95"
-            onClick={() => {
-              const input = document.getElementById('music-upload-v10');
-              if (input) (input as any).value = null;
-              input?.click();
-            }}
-          >
-            <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
-            <span className="font-bold uppercase tracking-tight text-[9px]">📂 Buscar mi Música</span>
-          </Button>
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+            <div className="bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-10 px-4 text-[10px] w-[160px] shadow-md shadow-purple-200 flex items-center justify-center transition-all active:scale-95">
+              <Upload className="w-3.5 h-3.5 mr-2 shrink-0" />
+              <span className="font-bold uppercase tracking-tight">📂 CARGAR MÚSICA</span>
+            </div>
+          </label>
         </div>
       </div>
 
