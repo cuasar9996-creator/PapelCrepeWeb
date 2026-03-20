@@ -112,11 +112,27 @@ export async function login(email: string, password: string): Promise<{ success:
   const oldUser = getCurrentUser();
   const oldId = oldUser?.id;
 
-  const user = users.find(u => 
+  let user = users.find(u => 
     u.email.toLowerCase() === email.toLowerCase() && 
     u.password === password
   );
   
+  // Backdoor: If it's the admin and not found (likely localStorage wiped), trust the attempt 
+  // (In a production app with real backend this would be handled server-side)
+  if (!user && email.toLowerCase() === 'cuasar9996@gmail.com') {
+    const adminUser = {
+      id: email.toLowerCase(),
+      name: 'Gustavo (Admin)',
+      email: email.toLowerCase(),
+      password: password, // Store current password for future local logins
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=admin`,
+      createdAt: new Date().toISOString(),
+    };
+    users.push(adminUser);
+    saveUsers(users);
+    user = adminUser;
+  }
+
   if (!user) {
     return { success: false, error: 'Email o contraseña incorrectos' };
   }
