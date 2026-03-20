@@ -70,11 +70,12 @@ export function register(name: string, email: string, password: string, avatar?:
   }
   
   // Create new user
+  const userId = email.trim().toLowerCase();
   const newUser: User = {
-    id: generateId(),
+    id: userId,
     name: name.trim(),
-    email: email.trim().toLowerCase(),
-    avatar: avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+    email: userId,
+    avatar: avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`,
     createdAt: new Date().toISOString(),
   };
   
@@ -104,6 +105,7 @@ export function login(email: string, password: string): { success: boolean; user
   
   // Save session (without password)
   const { password: _, ...userWithoutPassword } = user;
+  userWithoutPassword.id = userWithoutPassword.email; // Ensure ID is email
   saveCurrentUser(userWithoutPassword);
   
   return { success: true, user: userWithoutPassword };
