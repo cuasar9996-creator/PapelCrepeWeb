@@ -1,8 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Hammer, Clock, ShieldCheck, Mail } from 'lucide-react';
+import { Hammer, Clock, ShieldCheck, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
+import { TikTokIcon } from '@/components/icons/TikTokIcon';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export function MaintenanceMode() {
     return (
@@ -49,12 +51,48 @@ export function MaintenanceMode() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button className="bg-white text-black hover:bg-slate-200 rounded-full px-8 h-12 font-bold transition-all shadow-xl shadow-white/5">
+                    <Button 
+                        className="bg-white text-black hover:bg-slate-200 rounded-full px-8 h-12 font-bold transition-all shadow-xl shadow-white/5"
+                        onClick={() => toast.success('¡Te avisaremos cuando estemos listos!')}
+                    >
                         Notificarme al volver
                     </Button>
-                    <p className="text-xs text-slate-500">
-                        O visita nuestro <a href="#" className="underline text-purple-400">Instagram</a> para novedades.
-                    </p>
+                    <div className="flex items-center gap-6 mt-4 sm:mt-0">
+                        <a 
+                            href="https://www.facebook.com/share/18QLJceAj5/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-slate-500 hover:text-[#1877F2] transition-colors"
+                            title="Ver Facebook de VEG Software"
+                        >
+                            <Facebook className="w-5 h-5 transition-transform hover:scale-110" />
+                        </a>
+                        <a 
+                            href="https://www.tiktok.com/@papelcrepe2" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-slate-500 hover:text-white transition-colors"
+                            title="Ver TikTok de Papel Crepé"
+                        >
+                            <TikTokIcon className="w-5 h-5 fill-current transition-transform hover:scale-110" />
+                        </a>
+                        <a 
+                            href="#" 
+                            onClick={(e) => { e.preventDefault(); toast.info('Instagram próximamente'); }}
+                            className="text-slate-500 hover:text-[#E4405F] transition-colors"
+                            title="Instagram"
+                        >
+                            <Instagram className="w-5 h-5 transition-transform hover:scale-110" />
+                        </a>
+                        <a 
+                            href="#" 
+                            onClick={(e) => { e.preventDefault(); toast.info('YouTube próximamente'); }}
+                            className="text-slate-500 hover:text-[#FF0000] transition-colors"
+                            title="YouTube"
+                        >
+                            <Youtube className="w-5 h-5 transition-transform hover:scale-110" />
+                        </a>
+                    </div>
                 </div>
 
                 <div className="mt-16 text-[10px] uppercase tracking-[0.2em] text-slate-600 font-bold">

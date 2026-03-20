@@ -20,7 +20,17 @@ import { toast } from 'sonner';
 import { User, getCurrentUser, logout as authLogout } from '@/lib/auth';
 import { invitationsApi, adminApi } from '@/lib/api';
 import { MaintenanceMode } from '@/components/MaintenanceMode';
-import { Sparkles, Menu, X, Loader2 } from 'lucide-react';
+import { 
+  Sparkles, 
+  Menu, 
+  X, 
+  Loader2, 
+  Facebook, 
+  Instagram, 
+  Youtube, 
+  MessageSquare 
+} from 'lucide-react';
+import { TikTokIcon } from '@/components/icons/TikTokIcon';
 import { Button } from '@/components/ui/button';
 import { getCategoryById, categories, templates } from '@/data/templates';
 import {
@@ -620,15 +630,55 @@ export default function Home() {
                 </AccordionItem>
               </Accordion>
 
-              <div className="mt-2">
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Seguinos</h4>
+              <div className="flex flex-wrap gap-4">
+                <a 
+                  href="https://www.facebook.com/share/18QLJceAj5/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-[#1877F2] hover:border-[#1877F2] transition-all hover:bg-[#1877F2]/10 group"
+                  title="Facebook"
+                >
+                  <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </a>
+                <a 
+                  href="https://www.tiktok.com/@papelcrepe2" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-all hover:bg-white/10 group"
+                  title="TikTok"
+                >
+                  <TikTokIcon className="w-5 h-5 group-hover:scale-110 transition-transform fill-current" />
+                </a>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); toast.info('Instagram de VEG Software próximamente'); }}
+                  className="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-[#E4405F] hover:border-[#E4405F] transition-all hover:bg-[#E4405F]/10 group"
+                  title="Instagram"
+                >
+                  <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </a>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); toast.info('YouTube de VEG Software próximamente'); }}
+                  className="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-[#FF0000] hover:border-[#FF0000] transition-all hover:bg-[#FF0000]/10 group"
+                  title="YouTube"
+                >
+                  <Youtube className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </a>
+              </div>
+              <div className="mt-6">
                 <button
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                  className="text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-2"
                   onClick={() => toast.info('Función de contacto próximamente')}
                 >
-                  Contacto
+                  <MessageSquare className="w-4 h-4" />
+                  Contacto Directo
                 </button>
               </div>
             </div>
+          </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
             <p>© {new Date().getFullYear()} Papel Crepé. Todos los derechos reservados.</p>
