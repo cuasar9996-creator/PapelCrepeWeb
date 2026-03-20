@@ -151,18 +151,29 @@ export function updateProfile(updates: Partial<User>): { success: boolean; user?
   }
   
   const users = getUsers() as (User & { password?: string })[];
-  const userIndex = users.findIndex(u => u.id === currentUser.id);
+  
+  // Search by ID first, then by email as fallback
+  let userIndex = users.findIndex(u => u.id === currentUser.id);
+  if (userIndex === -1) {
+    userIndex = users.findIndex(u => u.email.toLowerCase() === currentUser.email.toLowerCase());
+  }
   
   if (userIndex === -1) {
-    return { success: false, error: 'Usuario no encontrado' };
+    // If still not found, create a new entry for this user
+    const newUserEntry = { ...currentUser, ...updates };
+    users.push(newUserEntry as User & { password?: string });
+    saveUsers(users);
+    saveCurrentUser(newUserEntry);
+    return { success: true, user: newUserEntry };
   }
   
   const updatedUser = { ...users[userIndex], ...updates };
+  updatedUser.id = currentUser.email; // Always use email as ID
   users[userIndex] = updatedUser;
   saveUsers(users);
   
   // Update session
-  const { password: _, ...userWithoutPassword } = updatedUser;
+  const { password: _, ...userWithoutPassword } = updatedUser as User & { password?: string };
   saveCurrentUser(userWithoutPassword);
   
   return { success: true, user: userWithoutPassword };

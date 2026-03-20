@@ -95,29 +95,29 @@ export function ProfileModal({ user, open, onClose, onUpdate }: ProfileModalProp
         }
 
         setIsUpdating(true);
+        
+        // 1. Always save locally first (instant, reliable)
+        const result = updateProfile({ name: name.trim(), avatar });
+        
+        if (!result.success || !result.user) {
+            toast.error(result.error || 'Error al guardar el perfil');
+            setIsUpdating(false);
+            return;
+        }
+        
+        // Update UI immediately
+        onUpdate(result.user);
+        
+        // 2. Try to sync to cloud in background
         try {
-            // Save to Cloud first
             await adminApi.saveProfile(user.email, { name: name.trim(), avatar });
-            
-            // Then update local profile
-            const result = updateProfile({ name: name.trim(), avatar });
-            
-            if (result.success && result.user) {
-                onUpdate(result.user);
-                toast.success('¡Perfil sincronizado en la nube! ☁️');
-                onClose();
-            }
-        } catch (error) {
-            console.error('Error al guardar perfil:', error);
-            // Fallback for local update if cloud fails
-            const result = updateProfile({ name: name.trim(), avatar });
-            if (result.success && result.user) {
-                onUpdate(result.user);
-                toast.success('Perfil actualizado localmente');
-                onClose();
-            }
+            toast.success('¡Perfil guardado y sincronizado en la nube! ☁️');
+        } catch (err) {
+            console.error('Cloud sync failed:', err);
+            toast.success('Perfil guardado localmente');
         } finally {
             setIsUpdating(false);
+            onClose();
         }
     };
 
