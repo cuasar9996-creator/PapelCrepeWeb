@@ -82,6 +82,33 @@ export const invitationsApi = {
             .eq('id', id);
 
         if (error) throw error;
+    },
+
+    async getUserStats(userId: string): Promise<{ totalInvitations: number; totalGuests: number }> {
+        const { data, error } = await supabase
+            .from('invitaciones')
+            .select('data')
+            .eq('user_id', userId);
+
+        if (error) throw error;
+
+        let totalInvitations = data?.length || 0;
+        let totalGuests = 0;
+
+        data?.forEach(item => {
+            const guests = item.data?.guests || [];
+            totalGuests += guests.length;
+            guests.forEach((g: any) => {
+                if (g.status === 'confirmed') {
+                    totalGuests += (g.plusOnes || 0);
+                }
+            });
+        });
+
+        return {
+            totalInvitations,
+            totalGuests
+        };
     }
 };
 

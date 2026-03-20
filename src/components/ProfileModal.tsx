@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { User as UserType, updateProfile } from '@/lib/auth';
+import { invitationsApi } from '@/lib/api';
 
 interface ProfileModalProps {
     user: UserType | null;
@@ -20,12 +21,18 @@ export function ProfileModal({ user, open, onClose, onUpdate }: ProfileModalProp
     const [name, setName] = useState(user?.name || '');
     const [avatar, setAvatar] = useState(user?.avatar || '');
     const [isUpdating, setIsUpdating] = useState(false);
+    const [stats, setStats] = useState({ totalInvitations: 0, totalGuests: 0 });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (user) {
+        if (user && open) {
             setName(user.name);
             setAvatar(user.avatar || '');
+            
+            // Load real stats
+            invitationsApi.getUserStats(user.id)
+                .then(setStats)
+                .catch(err => console.error('Error fetching stats:', err));
         }
     }, [user, open]);
 
@@ -119,20 +126,27 @@ export function ProfileModal({ user, open, onClose, onUpdate }: ProfileModalProp
                                         <Award className="w-5 h-5" />
                                         <span className="text-xs font-bold uppercase tracking-wider">Nivel VIP</span>
                                     </div>
-                                    <p className="text-lg font-bold text-slate-700 dark:text-slate-200">Organizador Pro</p>
+                                    <p className="text-lg font-bold text-slate-700 dark:text-slate-200">
+                                        {stats.totalInvitations >= 10 ? 'Organizador Maestro' : stats.totalInvitations >= 3 ? 'Organizador Pro' : 'Organizador Novel'}
+                                    </p>
                                     <div className="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full mt-2 overflow-hidden">
-                                        <div className="bg-rose-500 h-full w-[75%]" />
+                                        <div 
+                                            className="bg-rose-500 h-full transition-all duration-1000" 
+                                            style={{ width: `${Math.min(((stats.totalInvitations % 10) / 10) * 100, 100)}%` }}
+                                        />
                                     </div>
-                                    <p className="text-[10px] text-slate-400 mt-1 text-right">75% para Nivel Maestro</p>
+                                    <p className="text-[10px] text-slate-400 mt-1 text-right">
+                                        {10 - (stats.totalInvitations % 10)} invitaciones para sig. nivel
+                                    </p>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-3">
                                     <div className="bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 text-center">
-                                        <p className="text-xl font-bold text-rose-500">12</p>
+                                        <p className="text-xl font-bold text-rose-500">{stats.totalInvitations}</p>
                                         <p className="text-[10px] font-bold text-slate-400 uppercase">Eventos</p>
                                     </div>
                                     <div className="bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 text-center">
-                                        <p className="text-xl font-bold text-purple-500">158</p>
+                                        <p className="text-xl font-bold text-purple-500">{stats.totalGuests}</p>
                                         <p className="text-[10px] font-bold text-slate-400 uppercase">Invitados</p>
                                     </div>
                                 </div>
