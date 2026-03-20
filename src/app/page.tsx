@@ -139,7 +139,7 @@ export default function Home() {
       // Chequeo de Mantenimiento y Admin
       try {
         const config = await adminApi.getConfig();
-        const maintenanceActive = false; // config?.maintenanceMode || false; (Temporarily disabled for admin access)
+        const maintenanceActive = config?.maintenanceMode || false;
 
         // El admin es ÚNICAMENTE el usuario cuasar9996@gmail.com
         const userIsAdmin = currentUser?.email === 'cuasar9996@gmail.com';

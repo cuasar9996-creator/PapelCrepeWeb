@@ -16,6 +16,7 @@ import { CheckCircle2, XCircle, Music, Play, Pause, Volume2, VolumeX, Loader2, M
 import { v4 as uuidv4 } from 'uuid';
 import { useRef } from 'react';
 import { Guestbook } from '@/components/Guestbook';
+import { supabase } from '@/lib/supabase';
 
 interface PublicInvitationProps {
     invitation: Invitation;
@@ -35,7 +36,14 @@ export function PublicInvitation({ invitation }: PublicInvitationProps) {
     const [loading, setLoading] = useState(false);
     const [copied, setCopied] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [currentUser, setCurrentUser] = useState<any>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            setCurrentUser(user);
+        });
+    }, []);
 
     // Slideshow Logic
     useEffect(() => {
@@ -1009,6 +1017,7 @@ export function PublicInvitation({ invitation }: PublicInvitationProps) {
                         <Guestbook 
                             invitationId={invitation.id} 
                             accentColor={invitation.colors.accent} 
+                            isAdmin={currentUser?.email === 'cuasar9996@gmail.com'}
                         />
                     </div>
                 )}

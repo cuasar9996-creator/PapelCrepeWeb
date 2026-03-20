@@ -14,9 +14,10 @@ import { compressImage } from '@/lib/utils/image-optimization';
 interface GuestbookProps {
   invitationId: string;
   accentColor: string;
+  isAdmin?: boolean;
 }
 
-export function Guestbook({ invitationId, accentColor }: GuestbookProps) {
+export function Guestbook({ invitationId, accentColor, isAdmin = false }: GuestbookProps) {
   const [messages, setMessages] = useState<GuestbookMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
@@ -289,14 +290,16 @@ export function Guestbook({ invitationId, accentColor }: GuestbookProps) {
                   </div>
                 </div>
                 
-                {/* Delete button (Simple for now, can be restricted to host later) */}
-                <button 
-                  onClick={() => deleteMessage(m.id)}
-                  className="opacity-0 group-hover:opacity-100 p-2 text-gray-300 hover:text-red-500 transition-all"
-                  title="Eliminar mensaje"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                {/* Delete button (Restricted to host/admin) */}
+                {isAdmin && (
+                  <button 
+                    onClick={() => deleteMessage(m.id)}
+                    className="opacity-0 group-hover:opacity-100 p-2 text-gray-300 hover:text-red-500 transition-all"
+                    title="Eliminar mensaje"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
               </div>
 
               <p className="text-gray-600 text-sm leading-relaxed">{m.message}</p>
