@@ -4,10 +4,11 @@ import { Invitation, Guest } from '@/types';
 // Invitations API
 export const invitationsApi = {
     async getAll(userId: string): Promise<Invitation[]> {
+        // Search by ID or by email (in case they are different)
         const { data, error } = await supabase
             .from('invitaciones')
             .select('*')
-            .eq('user_id', userId)
+            .or(`user_id.eq.${userId},user_id.eq.${userId.includes('@') ? userId : 'none'}`)
             .order('created_at', { ascending: false });
 
         if (error) throw error;
@@ -88,7 +89,7 @@ export const invitationsApi = {
         const { data, error } = await supabase
             .from('invitaciones')
             .select('data')
-            .eq('user_id', userId);
+            .or(`user_id.eq.${userId},user_id.eq.${userId.includes('@') ? userId : 'none'}`);
 
         if (error) throw error;
 
@@ -109,6 +110,21 @@ export const invitationsApi = {
             totalInvitations,
             totalGuests
         };
+    },
+
+    async transferInvitations(fromId: string, toId: string): Promise<void> {
+        if (!fromId || !toId || fromId === toId) return;
+
+        console.log(`Migrating data from ${fromId} to ${toId}...`);
+        const { error } = await supabase
+            .from('invitaciones')
+            .update({ user_id: toId })
+            .eq('user_id', fromId);
+
+        if (error) {
+            console.error('Error transferring invitations:', error);
+            throw error;
+        }
     }
 };
 

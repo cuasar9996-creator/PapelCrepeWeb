@@ -148,6 +148,20 @@ export default function Home() {
       const currentUser = getInitialUser();
       setUser(currentUser);
 
+      // Sync profile from cloud if logged in
+      if (currentUser && currentUser.email) {
+        adminApi.getProfile(currentUser.email)
+          .then(cloudData => {
+            if (cloudData) {
+              const updatedUser = { ...currentUser, ...cloudData };
+              setUser(updatedUser);
+              // Sync local storage too
+              localStorage.setItem('invitation_app_current_user', JSON.stringify(updatedUser));
+            }
+          })
+          .catch(err => console.error("Error syncing profile:", err));
+      }
+
       // Chequeo de Mantenimiento y Admin
       try {
         const config = await adminApi.getConfig();
@@ -203,6 +217,18 @@ export default function Home() {
 
   const handleAuth = (authenticatedUser: User) => {
     setUser(authenticatedUser);
+    
+    // Sync profile from cloud after login
+    if (authenticatedUser.email) {
+      adminApi.getProfile(authenticatedUser.email).then(data => {
+        if (data) {
+          const finalUser = { ...authenticatedUser, ...data };
+          setUser(finalUser);
+          localStorage.setItem('invitation_app_current_user', JSON.stringify(finalUser));
+        }
+      });
+    }
+    
     refreshInvitations(authenticatedUser.id);
     toast.success(`¡Bienvenido, ${authenticatedUser.name}!`);
   };

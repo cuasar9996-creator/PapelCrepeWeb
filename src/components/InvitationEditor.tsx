@@ -122,7 +122,7 @@ export function InvitationEditor({
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSaved, setHasSaved] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [isPaid, setIsPaid] = useState(false);
+  const [isPaid, setIsPaid] = useState(existingInvitation?.isPaid || false);
   const [config, setConfig] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);

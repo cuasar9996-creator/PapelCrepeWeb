@@ -1,4 +1,5 @@
 // Auth utilities for localStorage-based authentication
+import { invitationsApi } from './api';
 
 export interface User {
   id: string;
@@ -50,9 +51,13 @@ function saveCurrentUser(user: User | null): void {
 }
 
 // Register new user
-export function register(name: string, email: string, password: string, avatar?: string): { success: boolean; user?: User; error?: string } {
+export async function register(name: string, email: string, password: string, avatar?: string): Promise<{ success: boolean; user?: User; error?: string }> {
   const users = getUsers();
   
+  // Capture old ID for migration before creating new session
+  const oldUser = getCurrentUser();
+  const oldId = oldUser?.id;
+
   // Check if email already exists
   if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
     return { success: false, error: 'Este email ya está registrado' };
@@ -87,13 +92,26 @@ export function register(name: string, email: string, password: string, avatar?:
   // Auto login after registration
   saveCurrentUser(newUser);
   
+  // Migrate data if needed
+  if (oldId && !oldId.includes('@')) {
+    try {
+      await invitationsApi.transferInvitations(oldId, newUser.id);
+    } catch (e) {
+      console.error('Migration failed:', e);
+    }
+  }
+
   return { success: true, user: newUser };
 }
 
 // Login user
-export function login(email: string, password: string): { success: boolean; user?: User; error?: string } {
+export async function login(email: string, password: string): Promise<{ success: boolean; user?: User; error?: string }> {
   const users = getUsers() as (User & { password: string })[];
   
+  // Capture old ID for migration
+  const oldUser = getCurrentUser();
+  const oldId = oldUser?.id;
+
   const user = users.find(u => 
     u.email.toLowerCase() === email.toLowerCase() && 
     u.password === password
@@ -108,6 +126,15 @@ export function login(email: string, password: string): { success: boolean; user
   userWithoutPassword.id = userWithoutPassword.email; // Ensure ID is email
   saveCurrentUser(userWithoutPassword);
   
+  // Migrate data if needed
+  if (oldId && !oldId.includes('@')) {
+    try {
+      await invitationsApi.transferInvitations(oldId, userWithoutPassword.id);
+    } catch (e) {
+      console.error('Migration failed:', e);
+    }
+  }
+
   return { success: true, user: userWithoutPassword };
 }
 
