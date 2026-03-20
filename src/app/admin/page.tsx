@@ -535,38 +535,59 @@ export default function AdminPage() {
                                             </div>
                                             <p className="text-xs text-emerald-600 font-medium max-w-[200px]">Este valor se usa para convertir precios de USD a Pesos (ARS) en toda la web.</p>
                                         </div>
-                                    </div>
+                                        <div className="flex flex-col md:flex-row gap-4 mt-6">
+                                            {/* Tarjetas 2D */}
+                                            <div className="flex-1 flex flex-col p-4 bg-slate-50 rounded-xl border border-slate-100 gap-4">
+                                                <div className="flex justify-between items-start w-full">
+                                                    <div>
+                                                        <p className="font-bold text-slate-800 text-sm md:text-base">Tarjetas 2D (Estándar)</p>
+                                                        <p className="text-[11px] text-slate-500">Diseños fijos sin video</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="relative flex-1">
+                                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">USD $</span>
+                                                        <Input
+                                                            type="number"
+                                                            value={config.priceStandard || '7.99'}
+                                                            onChange={e => setConfig({ ...config, priceStandard: e.target.value })}
+                                                            className="pl-14 bg-white h-12 border-slate-200 shadow-sm font-bold text-black"
+                                                        />
+                                                    </div>
+                                                    <div className="flex-1 px-4 h-12 flex flex-col justify-center bg-white border border-slate-200 rounded-lg">
+                                                        <span className="text-[9px] text-slate-400 font-bold uppercase">Precio Final ARS</span>
+                                                        <span className="font-black text-rose-500 text-sm">
+                                                            $ {(Number(config.priceStandard || 0) * (config.exchangeRate || 1)).toLocaleString('es-AR')}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    <div className="flex flex-col md:flex-row gap-4">
-                                        {/* Tarjetas 2D */}
-                                        <div className="flex-1 flex flex-col md:flex-row items-start md:items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 gap-4">
-                                            <div>
-                                                <p className="font-bold text-slate-800 text-sm md:text-base">Tarjetas 2D (Estándar)</p>
-                                                <p className="text-[11px] text-slate-500">Diseños fijos sin video (USD)</p>
-                                            </div>
-                                            <div className="relative w-full md:w-32 shrink-0">
-                                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
-                                                <Input
-                                                    value={config.priceStandard || '0.00'}
-                                                    onChange={e => setConfig({ ...config, priceStandard: e.target.value })}
-                                                    className="pl-8 bg-white h-10 border-slate-200 shadow-sm"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        {/* Tarjetas 3D */}
-                                        <div className="flex-1 flex flex-col md:flex-row items-start md:items-center justify-between p-4 bg-amber-50 rounded-xl border border-amber-100 gap-4">
-                                            <div>
-                                                <p className="font-bold text-slate-800 text-sm md:text-base flex items-center gap-1">Tarjetas 3D (Premium) <span className="text-[10px] bg-amber-200 text-amber-800 px-1.5 rounded uppercase font-bold">LIVE</span></p>
-                                                <p className="text-[11px] text-amber-600/70">Video y efectos dinámicos (USD)</p>
-                                            </div>
-                                            <div className="relative w-full md:w-32 shrink-0">
-                                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600 font-bold">$</span>
-                                                <Input
-                                                    value={config.pricePremium || '4.99'}
-                                                    onChange={e => setConfig({ ...config, pricePremium: e.target.value })}
-                                                    className="pl-8 bg-white border-amber-200 focus:border-amber-400 focus:ring-amber-400 h-10 shadow-sm"
-                                                />
+                                            {/* Tarjetas 3D */}
+                                            <div className="flex-1 flex flex-col p-4 bg-amber-50 rounded-xl border border-amber-100 gap-4">
+                                                <div className="flex justify-between items-start w-full">
+                                                    <div>
+                                                        <p className="font-bold text-amber-900 text-sm md:text-base flex items-center gap-1">Tarjetas 3D (Premium) <span className="text-[10px] bg-amber-200 text-amber-800 px-1.5 rounded uppercase font-bold">LIVE</span></p>
+                                                        <p className="text-[11px] text-amber-600/70">Video y efectos dinámicos</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="relative flex-1">
+                                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600 font-bold text-sm">USD $</span>
+                                                        <Input
+                                                            type="number"
+                                                            value={config.pricePremium || '19.99'}
+                                                            onChange={e => setConfig({ ...config, pricePremium: e.target.value })}
+                                                            className="pl-14 bg-white border-amber-200 focus:border-amber-400 focus:ring-amber-400 h-12 shadow-sm font-bold text-black"
+                                                        />
+                                                    </div>
+                                                    <div className="flex-1 px-4 h-12 flex flex-col justify-center bg-white border border-amber-200 rounded-lg">
+                                                        <span className="text-[9px] text-amber-500 font-bold uppercase">Precio Final ARS</span>
+                                                        <span className="font-black text-amber-600 text-sm">
+                                                            $ {(Number(config.pricePremium || 0) * (config.exchangeRate || 1)).toLocaleString('es-AR')}
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
