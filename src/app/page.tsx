@@ -588,31 +588,8 @@ export default function Home() {
                 Crea invitaciones inolvidables con diseño profesional.
                 Personalización total, música, RSVP interactivo y gestión fácil de invitados.
               </p>
-
-              <div className="pt-4 border-t border-gray-800/50">
-                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Medios de Pago</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-2 group cursor-default">
-                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110 flex items-center justify-center">
-                      <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadopago/logo__large.png" alt="Mercado Pago" className="w-full h-auto object-contain" />
-                    </div>
-                    <span className="text-[10px] font-bold text-white/80">Mercado Pago</span>
-                  </div>
-                  <div className="flex items-center gap-2 group cursor-default">
-                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110 flex items-center justify-center">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="w-full h-auto object-contain" />
-                    </div>
-                    <span className="text-[10px] font-bold text-white/80">PayPal</span>
-                  </div>
-                  <div className="flex items-center gap-2 group cursor-default">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 p-1 border border-white/20 shadow-sm transition-transform group-hover:scale-110 backdrop-blur-sm flex items-center justify-center">
-                       <div className="w-full h-full rounded bg-sky-400 flex items-center justify-center text-[7px] font-black text-slate-900 uppercase">Bru</div>
-                    </div>
-                    <span className="text-[10px] font-bold text-white/80">Brubank</span>
-                  </div>
-                </div>
-              </div>
             </div>
+
             <div>
               <h4 className="font-semibold mb-4">Recursos</h4>
               <Accordion type="single" collapsible className="w-full border-none">
@@ -706,7 +683,28 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
+
+          {/* Payment Methods — full-width row, CSS-only badges, never depends on external URLs */}
+          <div className="border-t border-gray-800 mt-8 pt-6">
+            <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Medios de Pago Aceptados</p>
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Mercado Pago */}
+              <div className="h-9 px-4 rounded-lg bg-[#009EE3] flex items-center justify-center shadow-sm hover:scale-105 transition-transform cursor-default">
+                <span className="text-white font-black text-xs tracking-tight">💳 Mercado Pago</span>
+              </div>
+              {/* PayPal */}
+              <div className="h-9 px-4 rounded-lg bg-[#003087] flex items-center justify-center shadow-sm hover:scale-105 transition-transform cursor-default">
+                <span className="text-[#00B2E5] font-black text-xs tracking-tight">🌐 PayPal</span>
+              </div>
+              {/* Brubank */}
+              <div className="h-9 px-4 rounded-lg bg-[#00C8FF] flex items-center justify-center shadow-sm hover:scale-105 transition-transform cursor-default">
+                <span className="text-slate-900 font-black text-xs tracking-tight">🏦 Brubank</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t border-gray-800 mt-6 pt-6 text-center text-sm text-gray-500">
             <p>© {new Date().getFullYear()} Papel Crepé. Todos los derechos reservados.</p>
           </div>
         </div>
