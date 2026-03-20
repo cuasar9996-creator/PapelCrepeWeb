@@ -167,7 +167,7 @@ export function Guestbook({ invitationId, accentColor, isAdmin = false }: Guestb
       </div>
 
       {/* Form Section */}
-      <div className="bg-gray-50/50 p-6 rounded-3xl border border-gray-100 shadow-sm transition-all hover:shadow-md">
+      <div className="bg-gray-50/50 p-4 rounded-3xl border border-gray-100 shadow-sm transition-all hover:shadow-md overflow-hidden">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Input
@@ -221,7 +221,7 @@ export function Guestbook({ invitationId, accentColor, isAdmin = false }: Guestb
             )}
           </AnimatePresence>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 w-full">
             <input 
               type="file" 
               accept="image/*" 
@@ -233,21 +233,21 @@ export function Guestbook({ invitationId, accentColor, isAdmin = false }: Guestb
               type="button"
               variant="outline"
               onClick={() => fileInputRef.current?.click()}
-              className="rounded-xl border-gray-200 h-12 flex-1 gap-2 text-gray-600 hover:bg-white"
+              className="rounded-xl border-gray-200 h-10 flex-1 gap-1.5 text-gray-600 hover:bg-white text-xs"
             >
-              <Camera className="w-4 h-4" />
-              <span>{imageUrl ? 'Cambiar Foto' : 'Subir Foto'}</span>
+              <Camera className="w-4 h-4 shrink-0" />
+              <span className="truncate">{imageUrl ? 'Cambiar Foto' : 'Subir Foto'}</span>
             </Button>
             <Button
               type="submit"
               disabled={sending}
-              className="rounded-xl h-12 px-8 font-bold shadow-lg shadow-rose-100 min-w-[120px]"
+              className="rounded-xl h-10 px-5 font-bold shadow-md shrink-0 text-xs"
               style={{ backgroundColor: accentColor, color: '#FFFFFF' }}
             >
-              {sending ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+              {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : (
                 <>
                   <span>Enviar</span>
-                  <Send className="w-4 h-4 ml-2" />
+                  <Send className="w-3.5 h-3.5 ml-1.5" />
                 </>
               )}
             </Button>
