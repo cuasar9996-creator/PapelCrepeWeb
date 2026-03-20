@@ -212,8 +212,8 @@ export const adminApi = {
                 paypalLink: 'https://paypal.me/ejemplo',
                 enableProFeatures: true,
                 maintenanceMode: false,
-                priceStandard: '0.00',
-                pricePremium: '4.99',
+                priceStandard: '7.99',
+                pricePremium: '19.99',
                 exchangeRate: 1250
             };
         }
