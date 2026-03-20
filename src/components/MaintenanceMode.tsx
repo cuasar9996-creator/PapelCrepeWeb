@@ -134,9 +134,9 @@ export function MaintenanceMode() {
             />
 
             <AuthModal 
-                isOpen={showAuth}
+                open={showAuth}
                 onClose={() => setShowAuth(false)}
-                onSuccess={handleAuth}
+                onAuth={handleAuth}
             />
         </div>
     );

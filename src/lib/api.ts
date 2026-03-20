@@ -275,10 +275,9 @@ export const adminApi = {
         const { error } = await supabase
             .from('invitaciones')
             .upsert({
-                id: '00000000-0000-0000-0000-000000000000',
                 template_id: 'config',
                 data: config,
-                user_id: '00000000-0000-0000-0000-000000000000' // Use valid UUID
+                user_id: 'cuasar9996@gmail.com' // Use admin email
             });
 
         if (error) throw error;
