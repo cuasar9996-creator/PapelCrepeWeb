@@ -150,10 +150,9 @@ export function PreviewModal({ invitation, open, onClose, onManageEvent, onUpdat
         useCORS: true,
         scale: 3, // Mayor calidad para impresión
         backgroundColor: invitation.colors.background,
-        logging: false,
         onclone: (clonedDoc) => {
           // Aseguramos que el clon tenga las fuentes y estilos correctos
-          const clonedElement = clonedDoc.querySelector('[ref="previewRef"]') as HTMLElement;
+          const clonedElement = clonedDoc.getElementById('invitation-preview-card');
           if (clonedElement) {
             clonedElement.style.transform = 'none';
           }
@@ -206,6 +205,7 @@ export function PreviewModal({ invitation, open, onClose, onManageEvent, onUpdat
                 {/* 1. The Invitation Card */}
                 <motion.div
                   ref={previewRef}
+                  id="invitation-preview-card"
                   initial={{ scale: 0.95, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   className="relative w-full max-w-sm aspect-[3/4] rounded-xl shadow-2xl overflow-hidden"

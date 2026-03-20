@@ -218,14 +218,21 @@ export function PaymentModal({
                             </button>
                         </div>
 
-                        {/* Verification Button (Simulated flow for the user's request) */}
+                        {/* Instruction for the user */}
+                        <div className="p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 border-dashed">
+                            <p className="text-[11px] text-slate-500 font-medium text-center leading-relaxed">
+                                <Info className="w-4 h-4 inline-block mr-1 text-slate-400 mb-0.5" />
+                                Una vez realizado el pago, tu invitación se activará <b>automáticamente</b> en unos segundos. No hace falta que envíes comprobante.
+                            </p>
+                        </div>
+
+                        {/* Button to close and check later */}
                         <div className="pt-2">
                             <Button
-                                onClick={onPaymentComplete}
-                                className="w-full h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black text-lg gap-3 shadow-xl shadow-slate-200 transition-all hover:-translate-y-1"
+                                onClick={onClose}
+                                className="w-full h-14 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-2xl font-bold text-lg gap-3 transition-all"
                             >
-                                He Realizado el Pago
-                                <CheckCircle2 className="w-6 h-6" />
+                                Volver y esperar activación
                             </Button>
                         </div>
 
