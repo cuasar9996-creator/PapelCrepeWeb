@@ -133,6 +133,7 @@ export function MusicSelector({
   const [filter, setFilter] = useState<string>(mappedCategory);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const musicInputRef = useRef<HTMLInputElement>(null);
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // initialize audio on mount
@@ -150,6 +151,19 @@ export function MusicSelector({
       audioRef.current.volume = volume / 100;
     }
   }, [volume]);
+
+  // Force horizontal scroll on the category bar (works inside parent ScrollArea)
+  useEffect(() => {
+    const el = categoryScrollRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // already horizontal
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
 
   const categories = ['all', ...new Set(DEMO_TRACKS.map(t => t.category))];
 
@@ -320,24 +334,24 @@ export function MusicSelector({
         </div>
       </div>
 
-      {/* Auto-play & Volume Settings */}
-      <div className="grid grid-cols-2 gap-2 w-full">
-        {/* Autoplay toggle */}
-        <div className="flex items-center justify-between px-3 h-10 bg-white rounded-lg border border-gray-100 gap-2">
-          <Label htmlFor="autoplay" className="text-[10px] font-bold uppercase text-gray-400 cursor-pointer whitespace-nowrap">
-            Autoplay
+      {/* Auto-play & Volume Settings — stacked full-width rows */}
+      <div className="space-y-2 w-full">
+        {/* Row 1: Autoplay */}
+        <div className="flex items-center justify-between px-3 h-10 bg-white rounded-lg border border-gray-100 w-full">
+          <Label htmlFor="autoplay" className="text-[10px] font-bold uppercase text-gray-500 cursor-pointer flex items-center gap-1.5">
+            <span>🔁</span> Reproducción automática al abrir
           </Label>
           <Switch
             id="autoplay"
             checked={autoPlay}
             onCheckedChange={onAutoPlayChange}
-            className="scale-75"
+            className="scale-75 shrink-0"
           />
         </div>
 
-        {/* Volume slider — constrained column, no overflow */}
-        <div className="flex items-center gap-2 px-3 h-10 bg-white rounded-lg border border-gray-100 overflow-hidden">
-          <Volume2 className="w-3 h-3 text-purple-400 shrink-0" />
+        {/* Row 2: Volume — full width, no overflow */}
+        <div className="flex items-center gap-3 px-3 h-10 bg-white rounded-lg border border-gray-100 w-full">
+          <Volume2 className="w-3.5 h-3.5 text-purple-400 shrink-0" />
           <div className="flex-1 min-w-0">
             <Slider
               value={[volume]}
@@ -347,16 +361,26 @@ export function MusicSelector({
               className="w-full"
             />
           </div>
-          <span className="text-[9px] font-bold text-purple-500 shrink-0 w-6 text-right">{volume}%</span>
+          <span className="text-[10px] font-bold text-purple-600 shrink-0 w-8 text-right">{volume}%</span>
         </div>
       </div>
 
       {/* Category selector */}
-      <div className="space-y-2 w-full min-w-0">
+      <div className="space-y-1.5 w-full">
         <p className="text-[10px] font-bold uppercase text-gray-400 ml-1">O elige un ritmo:</p>
-        {/* Scrollable category tabs */}
-        <div className="w-full overflow-x-auto pb-1" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d8b4fe transparent' }}>
-          <div className="flex gap-2 w-max pr-2">
+        {/* Scrollable category tabs — ref-based wheel scroll to bypass parent ScrollArea */}
+        <div
+          ref={categoryScrollRef}
+          className="w-full pb-1"
+          style={{
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#a855f7 transparent',
+          }}
+        >
+          <div className="flex gap-1.5 pr-2" style={{ width: 'max-content' }}>
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -365,7 +389,7 @@ export function MusicSelector({
                   px-3 py-1.5 rounded-xl text-[10px] whitespace-nowrap transition-all font-bold flex-shrink-0
                   ${filter === cat
                     ? 'bg-purple-600 text-white shadow-md'
-                    : 'bg-white text-gray-600 border border-gray-100 hover:border-purple-200 hover:text-purple-600'
+                    : 'bg-white text-gray-600 border border-gray-100 hover:border-purple-300 hover:text-purple-600'
                   }
                 `}
               >
