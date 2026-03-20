@@ -1468,16 +1468,6 @@ export function InvitationEditor({
                       : '0 1px 2px rgba(255,255,255,0.4)'
                   }}
                 >
-                  {/* Badge/Category indicator - Movido arriba para dejar limpio el centro */}
-                  <div
-                    className="absolute top-8 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg z-20 whitespace-nowrap"
-                    style={{
-                      backgroundColor: invitation.colors.accent,
-                      color: '#FFFFFF'
-                    }}
-                  >
-                    {invitation.category.toUpperCase()}
-                  </div>
 
                   <h2
                     className="text-3xl sm:text-4xl font-bold mb-4 leading-tight tracking-tight px-4"

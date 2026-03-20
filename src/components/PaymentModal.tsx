@@ -130,7 +130,7 @@ export function PaymentModal({
                             >
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mercado_Pago_logo.svg/105px-Mercado_Pago_logo.svg.png" alt="Mercado Pago" className="w-full object-contain" />
+                                        <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadopago/logo__large.png" alt="Mercado Pago" className="w-full object-contain" />
                                     </div>
                                     <div className="text-left">
                                         <p className="font-bold text-blue-900">Mercado Pago</p>

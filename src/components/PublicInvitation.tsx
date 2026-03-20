@@ -648,16 +648,6 @@ export function PublicInvitation({ invitation }: PublicInvitationProps) {
                                 : '0 1px 3px rgba(255,255,255,0.4)'
                         }}
                     >
-                        {/* Badge/Category - Movido arriba para dejar limpio el centro */}
-                        <div
-                            className="absolute top-8 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg z-20 whitespace-nowrap"
-                            style={{
-                                backgroundColor: invitation.colors.accent,
-                                color: '#FFFFFF'
-                            }}
-                        >
-                            {invitation.category.toUpperCase()}
-                        </div>
 
                         {/* Title */}
                         <h2

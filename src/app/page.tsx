@@ -594,7 +594,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex items-center gap-2 group cursor-default">
                     <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110 flex items-center justify-center">
-                      <img src="https://www.mercadopago.com/instore/merchant/static/images/mp-logo.png" alt="MP" className="w-full h-auto object-contain" />
+                      <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadopago/logo__large.png" alt="Mercado Pago" className="w-full h-auto object-contain" />
                     </div>
                     <span className="text-[10px] font-bold text-white/80">Mercado Pago</span>
                   </div>
