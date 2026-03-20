@@ -43,11 +43,14 @@ export function MaintenanceMode() {
                         <h3 className="font-bold text-sm mb-1">Tus Datos</h3>
                         <p className="text-xs text-slate-500">100% Protegidos</p>
                     </div>
-                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                        <Mail className="w-6 h-6 text-blue-400 mb-3 mx-auto" />
-                        <h3 className="font-bold text-sm mb-1">Soporte</h3>
-                        <p className="text-xs text-slate-500">Activo 24/7</p>
-                    </div>
+                    <a 
+                        href="mailto:vegsoftware@protonmail.com"
+                        className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all cursor-pointer group text-center"
+                    >
+                        <Mail className="w-6 h-6 text-blue-400 mb-3 mx-auto group-hover:scale-110 transition-transform" />
+                        <h3 className="font-bold text-sm mb-1 uppercase tracking-wider">Soporte</h3>
+                        <p className="text-[10px] text-slate-500">vegsoftware@protonmail.com</p>
+                    </a>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

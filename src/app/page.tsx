@@ -669,13 +669,13 @@ export default function Home() {
                 </a>
               </div>
               <div className="mt-6">
-                <button
+                <a
+                  href="mailto:vegsoftware@protonmail.com"
                   className="text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-2"
-                  onClick={() => toast.info('Función de contacto próximamente')}
                 >
                   <MessageSquare className="w-4 h-4" />
                   Contacto Directo
-                </button>
+                </a>
               </div>
             </div>
           </div>
