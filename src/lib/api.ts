@@ -319,30 +319,32 @@ export const adminApi = {
         return data ? JSON.parse(data) : null;
     },
 
-    // PROFILE SYNC (CLOUD)
+    // PROFILE SYNC (CLOUD) - Uses app_config table as key-value store
     async getProfile(email: string) {
+        const key = `profile_${email.toLowerCase()}`;
         const { data, error } = await supabase
-            .from('invitaciones')
-            .select('data')
-            .eq('template_id', 'profile')
-            .eq('user_id', email) // Using email as key for simple sync
+            .from('app_config')
+            .select('value')
+            .eq('key', key)
             .maybeSingle();
         
-        if (error) return null;
-        return data?.data || null;
+        if (error) {
+            console.error('getProfile error:', error);
+            return null;
+        }
+        return data?.value || null;
     },
 
     async saveProfile(email: string, profile: { name: string, avatar: string }) {
+        const key = `profile_${email.toLowerCase()}`;
         const { error } = await supabase
-            .from('invitaciones')
-            .upsert({
-                id: `profile-${email}`, // Unique ID per user email
-                template_id: 'profile',
-                data: profile,
-                user_id: email
-            });
+            .from('app_config')
+            .upsert({ key, value: profile }, { onConflict: 'key' });
         
-        if (error) throw error;
+        if (error) {
+            console.error('saveProfile error:', error);
+            throw error;
+        }
         return true;
     }
 };
