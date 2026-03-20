@@ -14,6 +14,7 @@ import { UserMenu } from '@/components/UserMenu';
 import { Dashboard } from '@/components/Dashboard';
 import { ProfileModal } from '@/components/ProfileModal';
 import { PublicInvitation } from '@/components/PublicInvitation';
+import { ContactModal } from '@/components/ContactModal';
 import { EventCategory, Template, Invitation, Guest, ViewMode } from '@/types';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
@@ -122,6 +123,7 @@ export default function Home() {
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   const [isMaintenance, setIsMaintenance] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [templateTypeFilter, setTemplateTypeFilter] = useState<'standard' | 'premium' | 'all'>('all');
@@ -669,13 +671,13 @@ export default function Home() {
                 </a>
               </div>
               <div className="mt-6">
-                <a
-                  href="mailto:vegsoftware@protonmail.com"
-                  className="text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-2"
+                <button
+                  onClick={() => setShowContactModal(true)}
+                  className="text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-2 px-0 py-0 h-auto bg-transparent border-none shadow-none"
                 >
-                  <MessageSquare className="w-4 h-4" />
+                  <MessageSquare className="w-4 h-4 text-slate-400 group-hover:text-rose-400" />
                   Contacto Directo
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -704,6 +706,11 @@ export default function Home() {
       />
 
       <Toaster />
+
+      <ContactModal 
+        open={showContactModal}
+        onClose={() => setShowContactModal(false)}
+      />
     </main >
   );
 }
