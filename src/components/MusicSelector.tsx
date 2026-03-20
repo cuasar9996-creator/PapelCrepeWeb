@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, Play, Pause, Volume2, Trash2, Upload } from 'lucide-react';
+import { Music, Play, Pause, Volume2, Trash2, Upload, ChevronDown, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -134,6 +134,8 @@ export function MusicSelector({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const musicInputRef = useRef<HTMLInputElement>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
+  const categoryMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // initialize audio on mount
@@ -152,17 +154,15 @@ export function MusicSelector({
     }
   }, [volume]);
 
-  // Force horizontal scroll on the category bar (works inside parent ScrollArea)
+  // Close category menu on outside click
   useEffect(() => {
-    const el = categoryScrollRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // already horizontal
-      e.preventDefault();
-      el.scrollLeft += e.deltaY;
+    const handleOutside = (e: MouseEvent) => {
+      if (categoryMenuRef.current && !categoryMenuRef.current.contains(e.target as Node)) {
+        setShowCategoryMenu(false);
+      }
     };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
   }, []);
 
   const categories = ['all', ...new Set(DEMO_TRACKS.map(t => t.category))];
@@ -365,39 +365,54 @@ export function MusicSelector({
         </div>
       </div>
 
-      {/* Category selector */}
-      <div className="space-y-1.5 w-full">
+      {/* Category selector — dropdown menu, works on all devices */}
+      <div className="space-y-1.5 w-full" ref={categoryMenuRef}>
         <p className="text-[10px] font-bold uppercase text-gray-400 ml-1">O elige un ritmo:</p>
-        {/* Scrollable category tabs — ref-based wheel scroll to bypass parent ScrollArea */}
-        <div
-          ref={categoryScrollRef}
-          className="w-full pb-1"
-          style={{
-            overflowX: 'auto',
-            overflowY: 'hidden',
-            WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'thin',
-            scrollbarColor: '#a855f7 transparent',
-          }}
+
+        {/* Trigger button */}
+        <button
+          onClick={() => setShowCategoryMenu(prev => !prev)}
+          className="w-full flex items-center justify-between px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm font-bold text-purple-700 hover:border-purple-400 transition-all active:scale-[0.98]"
         >
-          <div className="flex gap-1.5 pr-2" style={{ width: 'max-content' }}>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`
-                  px-3 py-1.5 rounded-xl text-[10px] whitespace-nowrap transition-all font-bold flex-shrink-0
-                  ${filter === cat
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'bg-white text-gray-600 border border-gray-100 hover:border-purple-300 hover:text-purple-600'
-                  }
-                `}
-              >
-                {cat === 'all' ? '🎵 Todos' : cat}
-              </button>
-            ))}
-          </div>
-        </div>
+          <span className="flex items-center gap-2">
+            <span className="text-base">{filter === 'all' ? '🎵' : '🎶'}</span>
+            {filter === 'all' ? 'Todos los estilos' : filter}
+          </span>
+          <ChevronDown
+            className={`w-4 h-4 text-purple-400 transition-transform duration-200 ${showCategoryMenu ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        {/* Dropdown panel */}
+        <AnimatePresence>
+          {showCategoryMenu && (
+            <motion.div
+              initial={{ opacity: 0, y: -6, scaleY: 0.95 }}
+              animate={{ opacity: 1, y: 0, scaleY: 1 }}
+              exit={{ opacity: 0, y: -6, scaleY: 0.95 }}
+              transition={{ duration: 0.15 }}
+              style={{ transformOrigin: 'top' }}
+              className="w-full bg-white border border-purple-100 rounded-xl shadow-lg overflow-hidden z-50"
+            >
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => { setFilter(cat); setShowCategoryMenu(false); }}
+                  className={`
+                    w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors
+                    ${filter === cat
+                      ? 'bg-purple-50 text-purple-700 font-bold'
+                      : 'text-gray-700 hover:bg-gray-50 font-medium'
+                    }
+                  `}
+                >
+                  <span>{cat === 'all' ? '🎵 Todos los estilos' : cat}</span>
+                  {filter === cat && <Check className="w-3.5 h-3.5 text-purple-600" />}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Track list */}
