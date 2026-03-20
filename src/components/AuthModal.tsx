@@ -42,7 +42,7 @@ export function AuthModal({ open, onClose, onAuth }: AuthModalProps) {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    const result = login(loginEmail, loginPassword);
+    const result = await login(loginEmail, loginPassword);
 
     if (result.success && result.user) {
       onAuth(result.user);
@@ -69,7 +69,7 @@ export function AuthModal({ open, onClose, onAuth }: AuthModalProps) {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    const result = register(registerName, registerEmail, registerPassword);
+    const result = await register(registerName, registerEmail, registerPassword);
 
     if (result.success && result.user) {
       onAuth(result.user);
