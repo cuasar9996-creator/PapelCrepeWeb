@@ -4,11 +4,11 @@ import { Invitation, Guest } from '@/types';
 // Invitations API
 export const invitationsApi = {
     async getAll(userId: string): Promise<Invitation[]> {
-        // Search by ID or by email (in case they are different)
         const { data, error } = await supabase
             .from('invitaciones')
             .select('*')
-            .or(`user_id.eq.${userId},user_id.eq.${userId.includes('@') ? userId : 'none'}`)
+            .eq('user_id', userId)
+            .not('template_id', 'in', '("config","user_profile")')
             .order('created_at', { ascending: false });
 
         if (error) throw error;
