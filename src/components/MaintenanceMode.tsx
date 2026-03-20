@@ -6,10 +6,25 @@ import { TikTokIcon } from '@/components/icons/TikTokIcon';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { ContactModal } from './ContactModal';
+import { AuthModal } from './AuthModal';
 import { useState } from 'react';
+import { User } from '@/lib/auth';
 
 export function MaintenanceMode() {
     const [showContact, setShowContact] = useState(false);
+    const [showAuth, setShowAuth] = useState(false);
+
+    const handleAuth = (user: User) => {
+        if (user.email === 'cuasar9996@gmail.com') {
+            toast.success('¡Hola Gustavo! Ya podés acceder.');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            toast.error('Acceso restringido durante mantenimiento.');
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#0F0F10] text-white flex items-center justify-center p-6 overflow-hidden relative">
             {/* Background Decorative Elements */}
@@ -69,7 +84,6 @@ export function MaintenanceMode() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-slate-500 hover:text-[#1877F2] transition-colors"
-                            title="Ver Facebook de VEG Software"
                         >
                             <Facebook className="w-5 h-5 transition-transform hover:scale-110" />
                         </a>
@@ -78,7 +92,6 @@ export function MaintenanceMode() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-slate-500 hover:text-white transition-colors"
-                            title="Ver TikTok de Papel Crepé"
                         >
                             <TikTokIcon className="w-5 h-5 fill-current transition-transform hover:scale-110" />
                         </a>
@@ -86,7 +99,6 @@ export function MaintenanceMode() {
                             href="#" 
                             onClick={(e) => { e.preventDefault(); toast.info('Instagram próximamente'); }}
                             className="text-slate-500 hover:text-[#E4405F] transition-colors"
-                            title="Instagram"
                         >
                             <Instagram className="w-5 h-5 transition-transform hover:scale-110" />
                         </a>
@@ -94,14 +106,24 @@ export function MaintenanceMode() {
                             href="#" 
                             onClick={(e) => { e.preventDefault(); toast.info('YouTube próximamente'); }}
                             className="text-slate-500 hover:text-[#FF0000] transition-colors"
-                            title="YouTube"
                         >
                             <Youtube className="w-5 h-5 transition-transform hover:scale-110" />
                         </a>
                     </div>
                 </div>
 
-                <div className="mt-16 text-[10px] uppercase tracking-[0.2em] text-slate-600 font-bold">
+                <div className="mt-12">
+                    <Button 
+                        variant="ghost" 
+                        size="sm"
+                        className="text-slate-700 hover:text-slate-500 text-[10px] uppercase tracking-widest font-black"
+                        onClick={() => setShowAuth(true)}
+                    >
+                        Acceso Administrador
+                    </Button>
+                </div>
+
+                <div className="mt-8 text-[10px] uppercase tracking-[0.2em] text-slate-600 font-bold">
                     Papel Crepé Digital © 2026 • Buenos Aires
                 </div>
             </motion.div>
@@ -109,6 +131,12 @@ export function MaintenanceMode() {
             <ContactModal 
                 open={showContact}
                 onClose={() => setShowContact(false)}
+            />
+
+            <AuthModal 
+                isOpen={showAuth}
+                onClose={() => setShowAuth(false)}
+                onSuccess={handleAuth}
             />
         </div>
     );
