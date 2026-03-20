@@ -575,7 +575,7 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="md:col-span-2 space-y-4">
+            <div className="space-y-6">
               <div className="flex items-center gap-3">
                 <div className="bg-white/10 p-2 rounded-xl backdrop-blur-sm border border-white/10">
                   <img src="/logo-papel-crepe.png" alt="Logo" className="h-8 w-auto" />
@@ -584,31 +584,31 @@ export default function Home() {
                   Papel Crepé
                 </h3>
               </div>
-              <p className="text-gray-400 text-sm max-w-md">
+              <p className="text-gray-400 text-sm leading-relaxed">
                 Crea invitaciones inolvidables con diseño profesional.
                 Personalización total, música, RSVP interactivo y gestión fácil de invitados.
               </p>
 
-              <div className="pt-6">
-                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Medios de Pago Oficiales</h4>
-                <div className="flex flex-wrap gap-4">
+              <div className="pt-4 border-t border-gray-800/50">
+                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Medios de Pago</h4>
+                <div className="grid grid-cols-2 gap-3">
                   <div className="flex items-center gap-2 group cursor-default">
-                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mercado_Pago_logo.svg/105px-Mercado_Pago_logo.svg.png" alt="MP" className="w-full h-full object-contain" />
+                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110 flex items-center justify-center">
+                      <img src="https://www.mercadopago.com/instore/merchant/static/images/mp-logo.png" alt="MP" className="w-full h-auto object-contain" />
                     </div>
-                    <span className="text-[11px] font-bold text-white/90">Mercado Pago</span>
+                    <span className="text-[10px] font-bold text-white/80">Mercado Pago</span>
                   </div>
                   <div className="flex items-center gap-2 group cursor-default">
-                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="w-full h-full object-contain" />
+                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110 flex items-center justify-center">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="w-full h-auto object-contain" />
                     </div>
-                    <span className="text-[11px] font-bold text-white/90">PayPal</span>
+                    <span className="text-[10px] font-bold text-white/80">PayPal</span>
                   </div>
                   <div className="flex items-center gap-2 group cursor-default">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 p-1 border border-white/20 shadow-sm transition-transform group-hover:scale-110 backdrop-blur-sm">
-                       <div className="w-full h-full rounded bg-sky-400 flex items-center justify-center text-[8px] font-black text-slate-900 uppercase">Bru</div>
+                    <div className="w-8 h-8 rounded-lg bg-white/10 p-1 border border-white/20 shadow-sm transition-transform group-hover:scale-110 backdrop-blur-sm flex items-center justify-center">
+                       <div className="w-full h-full rounded bg-sky-400 flex items-center justify-center text-[7px] font-black text-slate-900 uppercase">Bru</div>
                     </div>
-                    <span className="text-[11px] font-bold text-white/90">Brubank</span>
+                    <span className="text-[10px] font-bold text-white/80">Brubank</span>
                   </div>
                 </div>
               </div>
