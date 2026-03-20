@@ -1,4 +1,5 @@
 'use client';
+import { getCurrentUser } from '@/lib/auth';
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -1594,6 +1595,8 @@ export function InvitationEditor({
         paypalLink={config?.paypalLink}
         exchangeRate={config?.exchangeRate}
         onPaymentComplete={onPaymentComplete}
+        invitationId={invitation.id}
+        userEmail={getCurrentUser()?.email}
       />
     </div>
   </>

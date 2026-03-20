@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     CreditCard,
@@ -21,6 +22,8 @@ interface PaymentModalProps {
     price: string;
     isPremium: boolean;
     onPaymentComplete: () => void;
+    invitationId?: string;
+    userEmail?: string;
     mercadoPagoLink?: string;
     paypalLink?: string;
     brubankLink?: string;
@@ -33,6 +36,8 @@ export function PaymentModal({
     price,
     isPremium,
     onPaymentComplete,
+    invitationId,
+    userEmail,
     mercadoPagoLink = 'https://mpago.la/example',
     paypalLink = 'https://paypal.me/example',
     brubankLink = 'Alias.Brubank.Ejemplo',
@@ -40,10 +45,39 @@ export function PaymentModal({
 }: PaymentModalProps) {
     if (!isOpen) return null;
 
+    const [isLoadingMP, setIsLoadingMP] = useState(false);
+
+    const handleMercadoPago = async () => {
+        setIsLoadingMP(true);
+        try {
+            const response = await fetch('/api/mercadopago', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: invitationId || 'temp_' + Date.now(),
+                    title: isPremium ? 'Invitación Papel Crepé Premium' : 'Invitación Papel Crepé Standard',
+                    price: Number(price) * exchangeRate,
+                    userEmail: userEmail || 'cliente@papelcrepe.com.ar'
+                })
+            });
+
+            const data = await response.json();
+            if (data.init_point) {
+                window.open(data.init_point, '_blank');
+                toast.info('Se abrió MercadoPago en una ventana nueva');
+            } else {
+                throw new Error('No se pudo generar el link de pago');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Error al conectar con MercadoPago');
+        } finally {
+            setIsLoadingMP(false);
+        }
+    };
+
     const handleMethodClick = (link: string) => {
         window.open(link, '_blank');
-        // In a real app, we would wait for a webhook or check status.
-        // For now, we provide a button to "Confirm Payment" manually for the demo.
     };
 
     return (
@@ -125,15 +159,18 @@ export function PaymentModal({
 
                             {/* Mercado Pago */}
                             <button
-                                onClick={() => handleMethodClick(mercadoPagoLink)}
-                                className="w-full group flex items-center justify-between p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-2xl transition-all active:scale-[0.98]"
+                                onClick={handleMercadoPago}
+                                disabled={isLoadingMP}
+                                className="w-full group flex items-center justify-between p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-2xl transition-all active:scale-[0.98] disabled:opacity-50"
                             >
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2">
                                         <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadopago/logo__large.png" alt="Mercado Pago" className="w-full object-contain" />
                                     </div>
                                     <div className="text-left">
-                                        <p className="font-bold text-blue-900">Mercado Pago</p>
+                                        <p className="font-bold text-blue-900">
+                                            {isLoadingMP ? 'Generando link...' : 'Mercado Pago'}
+                                        </p>
                                         <p className="text-[10px] text-blue-700/70 font-medium">Tarjetas de Débito, Crédito o Dinero en cuenta</p>
                                     </div>
                                 </div>

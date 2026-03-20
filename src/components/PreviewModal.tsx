@@ -1,4 +1,5 @@
 'use client';
+import { getCurrentUser } from '@/lib/auth';
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -43,6 +44,7 @@ export function PreviewModal({ invitation, open, onClose, onManageEvent, onUpdat
   const [localIsPaid, setLocalIsPaid] = useState(false);
   const [config, setConfig] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const currentUser = getCurrentUser();
 
   // Slideshow Logic
   useEffect(() => {
@@ -613,6 +615,8 @@ export function PreviewModal({ invitation, open, onClose, onManageEvent, onUpdat
           paypalLink={config?.paypalLink}
           exchangeRate={config?.exchangeRate}
           onPaymentComplete={onPaymentComplete}
+          invitationId={invitation.id}
+          userEmail={currentUser?.email}
         />
       )}
     </>
