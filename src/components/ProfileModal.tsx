@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { User as UserType, updateProfile } from '@/lib/auth';
-import { invitationsApi } from '@/lib/api';
+import { adminApi, invitationsApi } from '@/lib/api';
 
 interface ProfileModalProps {
     user: UserType | null;
@@ -33,6 +33,18 @@ export function ProfileModal({ user, open, onClose, onUpdate }: ProfileModalProp
             invitationsApi.getUserStats(user.id)
                 .then(setStats)
                 .catch(err => console.error('Error fetching stats:', err));
+
+            // Sync profile from cloud if exists
+            adminApi.getProfile(user.email)
+                .then(cloudData => {
+                    if (cloudData) {
+                        setName(cloudData.name || user.name);
+                        setAvatar(cloudData.avatar || user.avatar || '');
+                        // Optional: update local version too if cloud is newer
+                        updateProfile({ name: cloudData.name, avatar: cloudData.avatar });
+                    }
+                })
+                .catch(err => console.error('Error syncing profile:', err));
         }
     }, [user, open]);
 
@@ -54,21 +66,36 @@ export function ProfileModal({ user, open, onClose, onUpdate }: ProfileModalProp
     };
 
     const handleSave = async () => {
+        if (!user) return;
         if (!name.trim()) {
             toast.error('El nombre no puede estar vacío');
             return;
         }
 
         setIsUpdating(true);
-        const result = updateProfile({ name: name.trim(), avatar });
-        setIsUpdating(false);
-
-        if (result.success && result.user) {
-            onUpdate(result.user);
-            toast.success('Perfil actualizado correctamente');
-            onClose();
-        } else {
-            toast.error(result.error || 'Error al actualizar el perfil');
+        try {
+            // Save to Cloud first
+            await adminApi.saveProfile(user.email, { name: name.trim(), avatar });
+            
+            // Then update local profile
+            const result = updateProfile({ name: name.trim(), avatar });
+            
+            if (result.success && result.user) {
+                onUpdate(result.user);
+                toast.success('¡Perfil sincronizado en la nube! ☁️');
+                onClose();
+            }
+        } catch (error) {
+            console.error('Error al guardar perfil:', error);
+            // Fallback for local update if cloud fails
+            const result = updateProfile({ name: name.trim(), avatar });
+            if (result.success && result.user) {
+                onUpdate(result.user);
+                toast.success('Perfil actualizado localmente');
+                onClose();
+            }
+        } finally {
+            setIsUpdating(false);
         }
     };
 

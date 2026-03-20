@@ -301,5 +301,32 @@ export const adminApi = {
         if (typeof window === 'undefined') return null;
         const data = localStorage.getItem('invitation_app_current_user');
         return data ? JSON.parse(data) : null;
+    },
+
+    // PROFILE SYNC (CLOUD)
+    async getProfile(email: string) {
+        const { data, error } = await supabase
+            .from('invitaciones')
+            .select('data')
+            .eq('template_id', 'profile')
+            .eq('user_id', email) // Using email as key for simple sync
+            .maybeSingle();
+        
+        if (error) return null;
+        return data?.data || null;
+    },
+
+    async saveProfile(email: string, profile: { name: string, avatar: string }) {
+        const { error } = await supabase
+            .from('invitaciones')
+            .upsert({
+                id: `profile-${email}`, // Unique ID per user email
+                template_id: 'profile',
+                data: profile,
+                user_id: email
+            });
+        
+        if (error) throw error;
+        return true;
     }
 };
