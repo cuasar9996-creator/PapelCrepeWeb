@@ -48,20 +48,42 @@ export function ProfileModal({ user, open, onClose, onUpdate }: ProfileModalProp
         }
     }, [user, open]);
 
-    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            if (file.size > 2 * 1024 * 1024) {
-                toast.error('La imagen es demasiado grande (máximo 2MB)');
-                return;
-            }
-
+    const compressImage = (file: File): Promise<string> => {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d')!;
+            const img = document.createElement('img');
             const reader = new FileReader();
-            reader.onload = (event) => {
-                const dataUrl = event.target?.result as string;
-                setAvatar(dataUrl);
+            reader.onload = (e) => {
+                img.onload = () => {
+                    const MAX = 150;
+                    let w = img.width, h = img.height;
+                    if (w > h) { h = (h / w) * MAX; w = MAX; }
+                    else { w = (w / h) * MAX; h = MAX; }
+                    canvas.width = w;
+                    canvas.height = h;
+                    ctx.drawImage(img, 0, 0, w, h);
+                    resolve(canvas.toDataURL('image/jpeg', 0.65));
+                };
+                img.src = e.target?.result as string;
             };
             reader.readAsDataURL(file);
+        });
+    };
+
+    const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                toast.error('La imagen es demasiado grande (máximo 5MB)');
+                return;
+            }
+            try {
+                const compressed = await compressImage(file);
+                setAvatar(compressed);
+            } catch {
+                toast.error('Error al procesar la imagen');
+            }
         }
     };
 
