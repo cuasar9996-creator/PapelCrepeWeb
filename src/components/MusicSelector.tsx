@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, Play, Pause, Volume2, VolumeX, Upload, Sparkles, Heart, PartyPopper, Baby, HeartHandshake } from 'lucide-react';
+import { Music, Play, Pause, Volume2, Trash2, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -204,7 +204,6 @@ export function MusicSelector({
 
   return (
     <div className="space-y-4 w-full min-w-0 overflow-hidden">
-      {/* Header */}
       {/* Top Actions: Selection + Upload */}
       <div className="bg-gray-50/50 p-3 rounded-xl border border-gray-100 space-y-3 min-w-0 overflow-hidden">
         <div className="flex items-center justify-between">
@@ -243,6 +242,20 @@ export function MusicSelector({
                 <div className="w-0.5 h-3 bg-purple-500 animate-music-bar [animation-delay:0.2s]"></div>
                 <div className="w-0.5 h-1.5 bg-purple-400 animate-music-bar [animation-delay:0.4s]"></div>
               </div>
+            )}
+            {/* Delete button for user-uploaded tracks */}
+            {selectedTrack?.id.startsWith('custom-') && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleStopAll();
+                  if (musicInputRef.current) musicInputRef.current.value = '';
+                }}
+                className="ml-1 p-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-500 transition-colors shrink-0"
+                title="Eliminar música subida"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
             )}
           </motion.div>
         ) : (
@@ -308,9 +321,9 @@ export function MusicSelector({
       </div>
 
       {/* Auto-play & Volume Settings */}
-      <div className="flex items-center gap-2 w-full min-w-0 overflow-hidden">
-        {/* Autoplay toggle — fixed width so it never grows */}
-        <div className="flex items-center justify-between px-3 h-10 bg-white rounded-lg border border-gray-100 shrink-0 gap-2">
+      <div className="grid grid-cols-2 gap-2 w-full">
+        {/* Autoplay toggle */}
+        <div className="flex items-center justify-between px-3 h-10 bg-white rounded-lg border border-gray-100 gap-2">
           <Label htmlFor="autoplay" className="text-[10px] font-bold uppercase text-gray-400 cursor-pointer whitespace-nowrap">
             Autoplay
           </Label>
@@ -322,10 +335,10 @@ export function MusicSelector({
           />
         </div>
 
-        {/* Volume slider — takes remaining space, clipped */}
-        <div className="flex items-center gap-2 px-3 h-10 bg-white rounded-lg border border-gray-100 flex-1 min-w-0 overflow-hidden">
+        {/* Volume slider — constrained column, no overflow */}
+        <div className="flex items-center gap-2 px-3 h-10 bg-white rounded-lg border border-gray-100 overflow-hidden">
           <Volume2 className="w-3 h-3 text-purple-400 shrink-0" />
-          <div className="flex-1 min-w-0 overflow-hidden">
+          <div className="flex-1 min-w-0">
             <Slider
               value={[volume]}
               onValueChange={([value]) => onVolumeChange(value)}
@@ -334,27 +347,29 @@ export function MusicSelector({
               className="w-full"
             />
           </div>
+          <span className="text-[9px] font-bold text-purple-500 shrink-0 w-6 text-right">{volume}%</span>
         </div>
       </div>
 
       {/* Category selector */}
       <div className="space-y-2 w-full min-w-0">
         <p className="text-[10px] font-bold uppercase text-gray-400 ml-1">O elige un ritmo:</p>
-        <div className="w-full overflow-x-auto scrollbar-hide pb-2">
-          <div className="flex gap-2 w-max min-w-full">
+        {/* Scrollable category tabs */}
+        <div className="w-full overflow-x-auto pb-1" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d8b4fe transparent' }}>
+          <div className="flex gap-2 w-max pr-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
                 className={`
-                  px-4 py-2 rounded-xl text-xs whitespace-nowrap transition-all font-medium flex-shrink-0
+                  px-3 py-1.5 rounded-xl text-[10px] whitespace-nowrap transition-all font-bold flex-shrink-0
                   ${filter === cat
                     ? 'bg-purple-600 text-white shadow-md'
-                    : 'bg-white text-gray-600 border border-gray-100 hover:border-purple-200'
+                    : 'bg-white text-gray-600 border border-gray-100 hover:border-purple-200 hover:text-purple-600'
                   }
                 `}
               >
-                {cat === 'all' ? 'Ver Todos' : cat}
+                {cat === 'all' ? '🎵 Todos' : cat}
               </button>
             ))}
           </div>
