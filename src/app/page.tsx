@@ -588,6 +588,30 @@ export default function Home() {
                 Crea invitaciones inolvidables con diseño profesional.
                 Personalización total, música, RSVP interactivo y gestión fácil de invitados.
               </p>
+
+              <div className="pt-6">
+                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Medios de Pago Oficiales</h4>
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center gap-2 group cursor-default">
+                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mercado_Pago_logo.svg/105px-Mercado_Pago_logo.svg.png" alt="MP" className="w-full h-full object-contain" />
+                    </div>
+                    <span className="text-[11px] font-bold text-white/90">Mercado Pago</span>
+                  </div>
+                  <div className="flex items-center gap-2 group cursor-default">
+                    <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm transition-transform group-hover:scale-110">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="w-full h-full object-contain" />
+                    </div>
+                    <span className="text-[11px] font-bold text-white/90">PayPal</span>
+                  </div>
+                  <div className="flex items-center gap-2 group cursor-default">
+                    <div className="w-8 h-8 rounded-lg bg-white/10 p-1 border border-white/20 shadow-sm transition-transform group-hover:scale-110 backdrop-blur-sm">
+                       <div className="w-full h-full rounded bg-sky-400 flex items-center justify-center text-[8px] font-black text-slate-900 uppercase">Bru</div>
+                    </div>
+                    <span className="text-[11px] font-bold text-white/90">Brubank</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Recursos</h4>
@@ -631,6 +655,7 @@ export default function Home() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
+            </div>
 
             <div>
               <h4 className="font-semibold mb-4 text-white">Seguinos</h4>
@@ -679,31 +704,7 @@ export default function Home() {
                   Contacto Directo
                 </button>
               </div>
-              <div className="mt-8 pt-6 border-t border-gray-800/50">
-                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Aceptamos</h4>
-                <div className="flex flex-wrap gap-4 opacity-70 hover:opacity-100 transition-opacity">
-                  <div className="h-8 px-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-default group">
-                    <span className="text-xs font-black text-[#009EE3] flex items-center gap-1.5 line-height-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#009EE3] animate-pulse"></span>
-                      Mercado Pago
-                    </span>
-                  </div>
-                  <div className="h-8 px-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-default group">
-                    <span className="text-xs font-black text-[#003087] flex items-center gap-1.5 line-height-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#003087]"></span>
-                      PayPal
-                    </span>
-                  </div>
-                  <div className="h-8 px-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-default group">
-                    <span className="text-xs font-black text-white flex items-center gap-1.5 line-height-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-                      Brubank
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
             <p>© {new Date().getFullYear()} Papel Crepé. Todos los derechos reservados.</p>
