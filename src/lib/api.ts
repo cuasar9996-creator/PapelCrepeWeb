@@ -319,27 +319,47 @@ export const adminApi = {
         return data ? JSON.parse(data) : null;
     },
 
-    // PROFILE SYNC (CLOUD) - Uses app_config table as key-value store
+    // PROFILE SYNC (CLOUD)
+    // Uses the same 'invitaciones' table that actually exists, with a deterministic
+    // UUID built from the user's email so it's always the same row per user.
+    _emailToUUID(email: string): string {
+        // Simple conversion: hash email into a UUID-shaped string
+        let hash = 0;
+        const str = email.toLowerCase().trim();
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash;
+        }
+        const h = Math.abs(hash).toString(16).padStart(8, '0');
+        return `00000001-${h.slice(0,4)}-${h.slice(4,8)}-abcd-${str.length.toString().padStart(12,'0')}`;
+    },
+
     async getProfile(email: string) {
-        const key = `profile_${email.toLowerCase()}`;
+        const uuid = this._emailToUUID(email);
         const { data, error } = await supabase
-            .from('app_config')
-            .select('value')
-            .eq('key', key)
+            .from('invitaciones')
+            .select('data')
+            .eq('id', uuid)
             .maybeSingle();
         
         if (error) {
             console.error('getProfile error:', error);
             return null;
         }
-        return data?.value || null;
+        return data?.data || null;
     },
 
     async saveProfile(email: string, profile: { name: string, avatar: string }) {
-        const key = `profile_${email.toLowerCase()}`;
+        const uuid = this._emailToUUID(email);
         const { error } = await supabase
-            .from('app_config')
-            .upsert({ key, value: profile }, { onConflict: 'key' });
+            .from('invitaciones')
+            .upsert({
+                id: uuid,
+                template_id: 'user_profile',
+                data: profile,
+                user_id: email.toLowerCase()
+            });
         
         if (error) {
             console.error('saveProfile error:', error);
