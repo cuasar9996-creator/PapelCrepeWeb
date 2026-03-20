@@ -210,10 +210,11 @@ export const adminApi = {
             return {
                 mercadoPagoLink: 'https://mpago.la/ejemplo',
                 paypalLink: 'https://paypal.me/ejemplo',
+                brubankLink: 'Alias.Brubank.Ejemplo',
                 enableProFeatures: true,
                 maintenanceMode: false,
-                priceStandard: '7.99',
-                pricePremium: '19.99',
+                priceStandard: '8.00',
+                pricePremium: '17.58',
                 exchangeRate: 1250
             };
         }

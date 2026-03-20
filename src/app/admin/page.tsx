@@ -55,10 +55,11 @@ export default function AdminPage() {
     const [config, setConfig] = useState({
         mercadoPagoLink: '',
         paypalLink: '',
+        brubankLink: '',
         enableProFeatures: true,
         maintenanceMode: false,
-        priceStandard: '0.00',
-        pricePremium: '4.99',
+        priceStandard: '8.00',
+        pricePremium: '17.58',
         exchangeRate: 1250
     });
 
@@ -488,6 +489,7 @@ export default function AdminPage() {
                     {/* =========== TAB: BILLING & PAGOS =========== */}
                     {activeTab === 'billing' && (
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 max-w-3xl">
+                            {/* Dashboard UI Version 2.1 */}
 
                             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                                 <div className="border-b border-slate-100 p-6 bg-slate-50/50">
@@ -518,74 +520,81 @@ export default function AdminPage() {
                                         />
                                     </div>
 
-                                    <div className="space-y-3 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                                    <div className="space-y-3">
                                         <div className="flex justify-between items-center">
-                                            <Label className="font-bold text-emerald-900">Tipo de Cambio (TC)</Label>
-                                            <div className="text-[10px] bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded uppercase font-bold">Oficial Interno</div>
+                                            <Label className="font-bold text-slate-700">Brubank (Alias o CVU)</Label>
+                                            <span className="text-[10px] bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold uppercase">Local ARS</span>
                                         </div>
-                                        <div className="flex items-center gap-4">
-                                            <div className="flex-1 relative">
-                                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-600 font-bold">$1 USD =</span>
-                                                <Input
-                                                    type="number"
-                                                    value={config.exchangeRate ?? 1250}
-                                                    onChange={e => setConfig({ ...config, exchangeRate: Number(e.target.value) })}
-                                                    className="pl-20 bg-white border-emerald-200 h-12"
-                                                />
-                                            </div>
-                                            <p className="text-xs text-emerald-600 font-medium max-w-[200px]">Este valor se usa para convertir precios de USD a Pesos (ARS) en toda la web.</p>
-                                        </div>
-                                        <div className="flex flex-col md:flex-row gap-4 mt-6">
-                                            {/* Tarjetas 2D */}
-                                            <div className="flex-1 flex flex-col p-4 bg-slate-50 rounded-xl border border-slate-100 gap-4">
-                                                <div className="flex justify-between items-start w-full">
-                                                    <div>
-                                                        <p className="font-bold text-slate-800 text-sm md:text-base">Tarjetas 2D (Estándar)</p>
-                                                        <p className="text-[11px] text-slate-500">Diseños fijos sin video</p>
-                                                    </div>
+                                        <Input
+                                            value={config.brubankLink || ''}
+                                            onChange={e => setConfig({ ...config, brubankLink: e.target.value })}
+                                            className="bg-sky-50/50 border-sky-400 border-2 h-12 focus:border-sky-500 focus:ring-sky-500"
+                                            placeholder="Ej: paplecrepe.bru.ars"
+                                        />
+                                        <p className="text-[11px] text-slate-400">Indica aquí tu alias o CVU de Brubank para transferencias directas.</p>
+                                    </div>
+                                    <div className="flex flex-col md:grid md:grid-cols-2 gap-8">
+                                        {/* Tarjetas 2D (Standard) */}
+                                        <div className="bg-slate-50 rounded-3xl border-2 border-slate-100 p-8 shadow-sm hover:shadow-md transition-all">
+                                            <div className="flex justify-between items-start mb-6">
+                                                <div>
+                                                    <h4 className="text-xl font-black text-slate-800">Tarjetas 2D</h4>
+                                                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Nivel Estándar</p>
                                                 </div>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="relative flex-1">
-                                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">USD $</span>
+                                            </div>
+                                            
+                                            <div className="space-y-6">
+                                                <div className="space-y-2">
+                                                    <Label className="text-[11px] font-black text-slate-400 uppercase tracking-tighter">Valor en Dólares (Global)</Label>
+                                                    <div className="relative">
+                                                        <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 font-black text-xl">U$D</span>
                                                         <Input
                                                             type="number"
-                                                            value={config.priceStandard || '7.99'}
+                                                            step="0.01"
+                                                            value={config.priceStandard || '8.00'}
                                                             onChange={e => setConfig({ ...config, priceStandard: e.target.value })}
-                                                            className="pl-14 bg-white h-12 border-slate-200 shadow-sm font-bold text-black"
+                                                            className="pl-16 h-16 bg-white border-2 border-slate-200 rounded-2xl text-3xl font-black text-slate-800 focus:ring-rose-500 focus:border-rose-500 shadow-inner"
                                                         />
                                                     </div>
-                                                    <div className="flex-1 px-4 h-12 flex flex-col justify-center bg-white border border-slate-200 rounded-lg">
-                                                        <span className="text-[9px] text-slate-400 font-bold uppercase">Precio Final ARS</span>
-                                                        <span className="font-black text-rose-500 text-sm">
-                                                            $ {(Number(config.priceStandard || 0) * (config.exchangeRate || 1)).toLocaleString('es-AR')}
-                                                        </span>
+                                                </div>
+
+                                                <div className="bg-white/60 p-5 rounded-2xl border-2 border-rose-100/50 backdrop-blur-sm">
+                                                    <p className="text-[10px] font-black text-rose-400 uppercase tracking-widest mb-1">Precio Final en Argentina</p>
+                                                    <div className="text-3xl font-black text-rose-500">
+                                                        $ {(Number(config.priceStandard || 0) * (config.exchangeRate || 1)).toLocaleString('es-AR')} <span className="text-sm font-bold text-rose-300">ARS</span>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            {/* Tarjetas 3D */}
-                                            <div className="flex-1 flex flex-col p-4 bg-amber-50 rounded-xl border border-amber-100 gap-4">
-                                                <div className="flex justify-between items-start w-full">
-                                                    <div>
-                                                        <p className="font-bold text-amber-900 text-sm md:text-base flex items-center gap-1">Tarjetas 3D (Premium) <span className="text-[10px] bg-amber-200 text-amber-800 px-1.5 rounded uppercase font-bold">LIVE</span></p>
-                                                        <p className="text-[11px] text-amber-600/70">Video y efectos dinámicos</p>
-                                                    </div>
+                                        {/* Tarjetas 3D (Premium) */}
+                                        <div className="bg-amber-50/50 rounded-3xl border-2 border-amber-100 p-8 shadow-sm hover:shadow-md transition-all">
+                                            <div className="flex justify-between items-start mb-6">
+                                                <div>
+                                                    <h4 className="text-xl font-black text-amber-900 flex items-center gap-2">Tarjetas 3D <span className="text-[10px] bg-amber-500 text-white px-2 py-1 rounded-lg uppercase tracking-widest font-black">LIVE</span></h4>
+                                                    <p className="text-amber-600/70 text-xs font-bold uppercase tracking-widest mt-1">Nivel Premium</p>
                                                 </div>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="relative flex-1">
-                                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600 font-bold text-sm">USD $</span>
+                                            </div>
+                                            
+                                            <div className="space-y-6">
+                                                <div className="space-y-2">
+                                                    <Label className="text-[11px] font-black text-amber-300 uppercase tracking-tighter">Valor en Dólares (Global)</Label>
+                                                    <div className="relative">
+                                                        <span className="absolute left-5 top-1/2 -translate-y-1/2 text-amber-300 font-black text-xl">U$D</span>
                                                         <Input
                                                             type="number"
-                                                            value={config.pricePremium || '19.99'}
+                                                            step="0.01"
+                                                            value={config.pricePremium || '17.58'}
                                                             onChange={e => setConfig({ ...config, pricePremium: e.target.value })}
-                                                            className="pl-14 bg-white border-amber-200 focus:border-amber-400 focus:ring-amber-400 h-12 shadow-sm font-bold text-black"
+                                                            className="pl-16 h-16 bg-white border-2 border-amber-200 rounded-2xl text-3xl font-black text-amber-900 focus:ring-amber-500 focus:border-amber-500 shadow-inner"
                                                         />
                                                     </div>
-                                                    <div className="flex-1 px-4 h-12 flex flex-col justify-center bg-white border border-amber-200 rounded-lg">
-                                                        <span className="text-[9px] text-amber-500 font-bold uppercase">Precio Final ARS</span>
-                                                        <span className="font-black text-amber-600 text-sm">
-                                                            $ {(Number(config.pricePremium || 0) * (config.exchangeRate || 1)).toLocaleString('es-AR')}
-                                                        </span>
+                                                </div>
+
+                                                <div className="bg-white/60 p-5 rounded-2xl border-2 border-amber-200/50 backdrop-blur-sm">
+                                                    <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-1">Precio Final en Argentina</p>
+                                                    <div className="text-3xl font-black text-amber-600">
+                                                        $ {(Number(config.pricePremium || 0) * (config.exchangeRate || 1)).toLocaleString('es-AR')} <span className="text-sm font-bold text-amber-300">ARS</span>
                                                     </div>
                                                 </div>
                                             </div>
