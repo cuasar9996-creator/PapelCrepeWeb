@@ -673,11 +673,34 @@ export default function Home() {
               <div className="mt-6">
                 <button
                   onClick={() => setShowContactModal(true)}
-                  className="text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-2 px-0 py-0 h-auto bg-transparent border-none shadow-none"
+                  className="text-sm text-gray-400 hover:text-rose-400 transition-colors flex items-center gap-2 px-0 py-0 h-auto bg-transparent border-none shadow-none group"
                 >
                   <MessageSquare className="w-4 h-4 text-slate-400 group-hover:text-rose-400" />
                   Contacto Directo
                 </button>
+              </div>
+              <div className="mt-8 pt-6 border-t border-gray-800/50">
+                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Aceptamos</h4>
+                <div className="flex flex-wrap gap-4 opacity-70 hover:opacity-100 transition-opacity">
+                  <div className="h-8 px-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-default group">
+                    <span className="text-xs font-black text-[#009EE3] flex items-center gap-1.5 line-height-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#009EE3] animate-pulse"></span>
+                      Mercado Pago
+                    </span>
+                  </div>
+                  <div className="h-8 px-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-default group">
+                    <span className="text-xs font-black text-[#003087] flex items-center gap-1.5 line-height-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#003087]"></span>
+                      PayPal
+                    </span>
+                  </div>
+                  <div className="h-8 px-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-default group">
+                    <span className="text-xs font-black text-white flex items-center gap-1.5 line-height-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                      Brubank
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
