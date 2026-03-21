@@ -39,7 +39,7 @@ export function PaymentModal({
     invitationId,
     userEmail,
     mercadoPagoLink = 'https://mpago.la/example',
-    paypalLink = 'https://paypal.me/example',
+    paypalLink = 'https://paypal.me/papelcrepeweb',
     brubankLink = '1430001713006092990016',
     exchangeRate = 1250
 }: PaymentModalProps) {
