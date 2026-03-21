@@ -167,14 +167,22 @@ export function PaymentModal({
                                 className="w-full group flex items-center justify-between p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-2xl transition-all active:scale-[0.98] disabled:opacity-50"
                             >
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2">
-                                        <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadopago/logo__large.png" alt="Mercado Pago" className="w-full object-contain" />
+                                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2 overflow-hidden">
+                                        <img 
+                                            src="https://www.mercadopago.com/instore/merchant/bundle/mptools/assets/gui/img/logo-mp.png" 
+                                            alt="Mercado Pago" 
+                                            className="w-full h-full object-contain"
+                                            onError={(e) => {
+                                                e.currentTarget.style.display = 'none';
+                                                e.currentTarget.parentElement!.innerHTML = '<span className="text-[10px] font-bold text-blue-600">MP</span>';
+                                            }}
+                                        />
                                     </div>
                                     <div className="text-left">
                                         <p className="font-bold text-blue-900">
                                             {isLoadingMP ? 'Generando link...' : 'Mercado Pago'}
                                         </p>
-                                        <p className="text-[10px] text-blue-700/70 font-medium">Tarjetas de Débito, Crédito o Dinero en cuenta</p>
+                                        <p className="text-[10px] text-blue-700/70 font-medium">Usa tus tarjetas o dinero en cuenta</p>
                                     </div>
                                 </div>
                                 <Zap className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform" />
