@@ -251,9 +251,9 @@ export const adminApi = {
         if (error) {
             // Fallback for demo if table/row doesn't exist
             return {
-                mercadoPagoLink: 'https://mpago.la/ejemplo',
-                paypalLink: 'https://paypal.me/ejemplo',
-                brubankLink: 'Alias.Brubank.Ejemplo',
+                mercadoPagoLink: 'https://mpago.la/2vY8YvE', // Link genérico o el que tengas configurado
+                paypalLink: 'https://paypal.me/papelcrepeweb',
+                brubankLink: '1430001713006092990016',
                 enableProFeatures: true,
                 maintenanceMode: false,
                 priceStandard: '8.00',
