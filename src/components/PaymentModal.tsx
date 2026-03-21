@@ -62,15 +62,18 @@ export function PaymentModal({
             });
 
             const data = await response.json();
-            if (data.init_point) {
+            
+            if (response.ok && data.init_point) {
                 window.open(data.init_point, '_blank');
                 toast.info('Se abrió MercadoPago en una ventana nueva');
             } else {
-                throw new Error('No se pudo generar el link de pago');
+                console.error('Error del servidor:', data);
+                const errorMsg = data.details || data.error || 'Error desconocido';
+                throw new Error(errorMsg);
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            toast.error('Error al conectar con MercadoPago');
+            toast.error(`MercadoPago Error: ${error.message}`);
         } finally {
             setIsLoadingMP(false);
         }
