@@ -114,7 +114,7 @@ export function TemplateGallery({
                   style={{ backgroundColor: template.defaultColors.background }}
                 >
                   {(template.backgroundImage || template.backgroundVideo) && (
-                    <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0">
                       {template.backgroundVideo && (
                         <video
                           autoPlay
