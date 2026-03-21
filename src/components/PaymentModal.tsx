@@ -211,29 +211,6 @@ export function PaymentModal({
                                 </div>
                                 <Globe className="w-5 h-5 text-indigo-400 group-hover:scale-110 transition-transform" />
                             </button>
-
-                            {/* Brubank */}
-                            <button
-                                onClick={() => {
-                                    navigator.clipboard.writeText(brubankLink);
-                                    toast.success('Alias copiado: ' + brubankLink);
-                                }}
-                                className="w-full group flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-950 border border-slate-800 rounded-2xl transition-all active:scale-[0.98] text-white"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-white/10 rounded-xl shadow-sm flex items-center justify-center p-2 border border-white/10">
-                                        <div className="w-full h-full rounded-md bg-sky-400 flex items-center justify-center font-black text-slate-900 text-xs">BRU</div>
-                                    </div>
-                                    <div className="text-left">
-                                        <p className="font-black">Transferencia Brubank</p>
-                                        <p className="text-[10px] text-white/50 font-medium font-mono uppercase">CBU: {brubankLink}</p>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col items-end gap-1">
-                                    <span className="text-[8px] bg-sky-500 text-white px-1.5 py-0.5 rounded font-black uppercase tracking-tighter">Sin comisiones</span>
-                                    <CheckCircle2 className="w-5 h-5 text-sky-400 group-hover:scale-110 transition-transform" />
-                                </div>
-                            </button>
                         </div>
 
                         {/* Instruction for the user */}
