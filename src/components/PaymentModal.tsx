@@ -169,12 +169,19 @@ export function PaymentModal({
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2 overflow-hidden">
                                         <img 
-                                            src="https://www.mercadopago.com/instore/merchant/bundle/mptools/assets/gui/img/logo-mp.png" 
+                                            src="https://http2.mlstatic.com/frontend-assets/mp-web-navigation/5.19.0/mercadopago-logo.svg" 
                                             alt="Mercado Pago" 
-                                            className="w-full h-full object-contain"
+                                            className="h-8 w-auto object-contain"
                                             onError={(e) => {
-                                                e.currentTarget.style.display = 'none';
-                                                e.currentTarget.parentElement!.innerHTML = '<span className="text-[10px] font-bold text-blue-600">MP</span>';
+                                                // Fallback if the logo fails to load
+                                                (e.target as HTMLImageElement).style.display = 'none';
+                                                const parent = (e.target as HTMLElement).parentElement;
+                                                if (parent && !parent.querySelector('.mp-fallback')) {
+                                                    const span = document.createElement('span');
+                                                    span.className = 'mp-fallback font-bold text-blue-600';
+                                                    span.innerText = 'Mercado Pago';
+                                                    parent.appendChild(span);
+                                                }
                                             }}
                                         />
                                     </div>
