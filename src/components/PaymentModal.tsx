@@ -40,7 +40,7 @@ export function PaymentModal({
     userEmail,
     mercadoPagoLink = 'https://mpago.la/example',
     paypalLink = 'https://paypal.me/example',
-    brubankLink = 'Alias.Brubank.Ejemplo',
+    brubankLink = '1430001713006092990016',
     exchangeRate = 1250
 }: PaymentModalProps) {
     if (!isOpen) return null;
@@ -226,7 +226,7 @@ export function PaymentModal({
                                     </div>
                                     <div className="text-left">
                                         <p className="font-black">Transferencia Brubank</p>
-                                        <p className="text-[10px] text-white/50 font-medium font-mono lowercase">{brubankLink}</p>
+                                        <p className="text-[10px] text-white/50 font-medium font-mono uppercase">CBU: {brubankLink}</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-end gap-1">
